@@ -11,19 +11,15 @@
             padding: 3px;
             cursor: pointer;
             }
-            [i18n=header] {
+            [class=title] {
                 font-size: 30px;
                 text-align: center;
-            }
-            [i18n=recipient] {
-                font-size: 18px;
+	    }
+	    [class=date] {
+                font-size: 16px;
                 text-align: left;
             }
-            [i18n=recipient] {
-                font-size: 18px;
-                text-align: left;
-            }
-            [i18n=purpose] {
+            [class=content] {
                 font-size: 18px;
                 text-align: left;
             }
@@ -51,15 +47,15 @@
             <span onclick="langChange(this);">Chinese</span>
             <span onclick="langChange(this);">English</span>
         </span>
-        <div i18n=header></div>
+        <div class=title i18n=header></div>
         <flexrow>
             <fillTen></fillTen>
-            <div i18n="date">2023/09/22</div>
+            <div class=date i18n="date">2023/09/22</div>
             <fillOne></fillOne>
         </flexrow>
         <block>
-        <div i18n=recipient>Ministry of Finance</div>
-        <div i18n=purpose>Content</div>
+        <div class=content i18n=recipient>Ministry of Finance</div>
+        <div class=content i18n=purpose>Content</div>
         </block>
 
         <script>
