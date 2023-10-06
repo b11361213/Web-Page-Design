@@ -2,6 +2,8 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="i18n.css" />
+        <link rel="stylesheet" type="text/css" href="i18n-items.css" />
+        <link rel="stylesheet" type="text/css" href="main.css" />
         <script src="jquery.js"></script>
         <style>
             [langSelect] span {
@@ -13,9 +15,10 @@
             }
             [class=title] {
                 font-size: 30px;
+                font-family: NotoSefif;
                 text-align: center;
-	    }
-	    [class=date] {
+            }
+            [class=date] {
                 font-size: 16px;
                 text-align: left;
             }
@@ -55,7 +58,9 @@
         </flexrow>
         <block>
         <div class=content i18n=recipient>Ministry of Finance</div>
-        <div class=content i18n=purpose>Content</div>
+        <div class=content i18n=purpose>To apply for
+            <span select=true i18n=firstTime></span>
+        </div>
         </block>
 
         <script>
@@ -63,6 +68,13 @@
                 let str = $(obj).text();
                 console.log(str);
                 $("body").attr("lang", str);
+            }
+            function contentItems(obj) {
+                let items = ["firstTime", "certificateHasCeased", "lost", "replacement", "englishVersion"]
+
+                for (let item of items) {
+                    $(`<span select=true i18n=${item}></span>`)
+                }
             }
         </script>
     </body>
