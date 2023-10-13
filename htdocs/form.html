@@ -36,6 +36,7 @@
                 font-family: NotoSefif;
                 font-size: 22px;
                 text-align: left;
+                margin-top: 4px;
             }
             [class=subcontent] {
                 font-family: NotoSefif;
@@ -66,6 +67,8 @@
         </style>
         <!-- [source](https://gazette.nat.gov.tw/EG_FileManager/eguploadpub/eg026150/ch04/type3/gov30/num13/images/Eg01.pdf) -->
         <!-- [source](https://www.etax.nat.gov.tw/etwmain/api/functions/etw212w/download/18a49929f0e00000c88d77d84d4a57bf/%E7%A9%BA%E7%99%BD%E6%9B%B8%E8%A1%A8(pdf%E4%B8%AD%E8%8B%B1%E4%B8%A6%E5%88%97).pdf) -->
+        <!-- [災害損失減免使用牌照稅申請書](https://www.etax.nat.gov.tw/etwmain/etw212w/detail/18ad49bbcb20000031d7f1e06ad74269) -->
+        <!-- [download source](https://www.etax.nat.gov.tw/etwmain/etw212w) -->
         <!-- [i18n Google sheets](https://docs.google.com/spreadsheets/d/1sp-Rw0xcjd-nEMIacbVywY5zIlCbBGr-Ja9EF0DgJfg) -->
     </head>
     <body language="Chinese">
@@ -98,6 +101,17 @@
 
             <div class=content i18n=description></div>
             <div class=subcontent>Handled in accordance with Article 5 of the Certified Public Bookkeepers Act and Rules Governing Issuance of Certificate of Public Bookkeeper.</div>
+            <div class=subcontent>The following documents are hereby inspected: (Please tick the attached items, see Note 2)</div>
+        
+            <div class=content>申請人資料：</div>
+            <div class=subcontent>申請人</div>
+            <div class=subcontent>身分證字號</div>
+            
+            <div class=subcontent>連絡電話</div>
+            <div class=subcontent>手機號碼</div>
+            
+            <div class=subcontent>居住縣市</div>
+            <div class=subcontent>通訊地址</div>
         </block>
 
         <!-- footer memo -->
@@ -115,6 +129,9 @@
                 $(o).css('cursor', 'pointer');
                 $(o).on('click', fun);
                 return this;
+            }
+            function csvConvert(str) {
+                return str.split(",").map(x=>x.trim()).filter(x=>x);
             }
             function contentItems(obj) {
                 let items = ["firstTime", "certificateHasCeased", "lost", "replacement", "englishVersion"];
