@@ -18,6 +18,15 @@
                 font-family: NotoSefif;
                 padding: 3px;
             }
+            [title] {
+                margin-right: 26px;
+            }
+            [content] {
+                /* flex-grow: 1; */
+                cursor: pointer;
+                display: flex;
+                padding-right: 50px;
+            }
             [class=langSelect] {
                 font-family: NotoSefif;
                 font-size: 16px;
@@ -26,17 +35,21 @@
                 font-family: NotoSefif;
                 font-size: 36px;
                 text-align: center;
-            }
+                margin-top: 28px;
+                margin-bottom: 28px;
+}
             [class=date] {
                 font-family: NotoSefif;
                 font-size: 18px;
                 text-align: left;
+                margin-bottom: 14px;
             }
             [class=content] {
                 font-family: NotoSefif;
                 font-size: 22px;
                 text-align: left;
-                margin-top: 4px;
+                margin-bottom: 8px;
+                margin-top: 10px;
             }
             [class=subcontent] {
                 font-family: NotoSefif;
@@ -44,11 +57,27 @@
                 text-align: left;
                 text-indent: 180px;
             }
+            [class=subForm] {
+                /* background-color: azure; */
+                border: solid 1px;
+                font-family: NotoSefif;
+                font-size: 22px;
+                margin-bottom: 8px;
+                margin-left: 180px;
+                margin-top: 8px;
+                padding-bottom: 12px;
+                padding-left: 32px;
+                padding-top: 12px;
+                text-align: left;
+            }
             #memo {
+                /* position:absolute; */
+                /* right: 12px; */
                 bottom: 4px;
                 font-size: 14px;
-                position:absolute;
-                right: 12px;
+            }
+            #checkboxOption {
+                margin-left: 24px;
             }
             flexrow {
                 display: flex;
@@ -96,34 +125,50 @@
             
             <div class=content i18n=purpose>
                 <span class=content i18n=toApplyFor></span>
-                <!-- <span select=true i18n=firstTime></span> -->
             </div>
+                <!-- <span select=true i18n=firstTime></span> -->
 
             <div class=content i18n=description></div>
             <div class=subcontent>Handled in accordance with Article 5 of the Certified Public Bookkeepers Act and Rules Governing Issuance of Certificate of Public Bookkeeper.</div>
             <div class=subcontent>The following documents are hereby inspected: (Please tick the attached items, see Note 2)</div>
         
-            <div class=content>申請人資料：</div>
-            <div class=subcontent>申請人</div>
-            <div class=subcontent>身分證字號</div>
-            
-            <div class=subcontent>連絡電話</div>
-            <div class=subcontent>手機號碼</div>
-            
-            <div class=subcontent>居住縣市</div>
-            <div class=subcontent>通訊地址</div>
+            <div class=content i18n=information></div>
         </block>
+
+        <!-- information form -->
+        <div class=subForm>
+            <flexrow information>
+                <!-- <span i18n=name></span>
+                <span content></span>
+                <span i18n=identityCardNumber></span>
+                <span content></span> -->
+            </flexrow>
+        </div>
+        
+        <!-- contact form -->
+        <div class=subForm>
+            <flexrow contact></flexrow>
+        </div>
+        
+        <!-- residence -->
+        <div class=subForm i18n=residence>
+            <flexrow style="flex-wrap: wrap;" residence></flexrow>
+        </div>
+        
+        <!-- address form -->
+        <div class=subForm>
+            <flexrow address></flexrow>
+        </div>
 
         <!-- footer memo -->
         <div id=memo>推薦使用 Firefox 瀏覽器瀏覽本網頁，以獲得最佳體驗</div>
 
-        <script>
+        <script>          
             function langChange(obj) {
                 let str = $(obj).text();
-                console.log(str);
+                // console.log(str);
                 $("body").attr("language", str);
-            }
-            
+            }       
             $.fn.OnClick = function(fun) {
                 let o = this;
                 $(o).css('cursor', 'pointer');
@@ -133,8 +178,9 @@
             function csvConvert(str) {
                 return str.split(",").map(x=>x.trim()).filter(x=>x);
             }
-            function contentItems(obj) {
-                let items = ["firstTime", "certificateHasCeased", "lost", "replacement", "englishVersion"];
+            function applyForSel(obj) {
+                let items = csvConvert(`firstTime, certificateHasCeased, lost, replacement, englishVersion`);
+                // let items = ["firstTime", "certificateHasCeased", "lost", "replacement", "englishVersion"];
 
                 for (let item of items) {
                     $(`<div class=subcontent select=false i18n=${item}></div>`).appendTo(obj).OnClick(function(e) {
@@ -151,7 +197,74 @@
                     });
                 }
             }
-            contentItems($("[i18n=purpose]"))
+            function residenceSel(obj) {
+                let citiesAndCounties = csvConvert(`
+                    taipeiCity, keelungCity, newTaipeiCity, lienchiangCounty, 
+                    yilanCounty, hsinchuCity, hsinchuCounty, taoyuanCity, 
+                    miaoliCounty, taichungCity, changhuaCounty, nantouCounty, 
+                    chiayiCity, chiayiCounty, yunlinCounty, tainanCity, 
+                    kaohsiungCity, penghuCounty, kinmenCounty, pingtungCounty, 
+                    taitungCounty, hualienCounty
+                    `);
+
+                for (let cityAndCounty of citiesAndCounties) {
+                    $(`<span style=white-space: nowrap select=false i18n=${cityAndCounty} id=checkboxOption></div>`).appendTo(obj).OnClick(function(e) {
+                        let u = e.currentTarget;
+                        let select = $(u).attr('select');
+                        if (select == 'false') {
+                            select = 'true';
+                            $(u).siblings().attr('select', 'false');
+                        }
+                        else {
+                            select = 'false';
+                        }
+                        $(u).attr('select', select);
+                    });
+                };
+            }
+            function fillOut(obj, tag) {
+                $.fn.fillIn = function(title) {
+                    let obj = this;
+                    let value = 5050;
+                    $(`
+                    <span i18n=${title} title></span>
+                    `).appendTo(obj);
+                    $(`
+                    <span content>${value}</span>
+                    `).appendTo(obj).OnClick((e)=>{
+                        let u = $(e.currentTarget);
+                        let old = u.html(); u.html("");
+                        let tbox = $("<textarea rows=1 cols=12>").html(old).appendTo(u).OnClick((e)=>{
+                                let o = $(e.currentTarget);
+                                e.stopPropagation();
+                            }).on("blur", e=>{
+                                let tbox = e.currentTarget;
+                                $(u).html($(tbox).val());
+                            });
+
+                            tbox.get(0).setSelectionRange(old.length, old.length);
+                            tbox.trigger('focus');
+                        });
+                        return this;
+                    }
+                    
+                    if (tag == "info") {
+                    obj.fillIn("name").append("<fillOne>").fillIn("identityCardNumber").append("<fillOne>");
+                    }
+                    if (tag == "contact") {
+                        obj.fillIn("contactNumber").append("<fillOne>").fillIn("phoneNumber").append("<fillOne>");
+                    }
+                    if (tag == "address") {
+                        obj.fillIn("address").append("<fillOne>");
+                    }
+                }
+
+            applyForSel($("[i18n=purpose]"));
+            residenceSel($("[residence]"));
+
+            fillOut($("[information]"), "info");
+            fillOut($("[contact]"), "contact");
+            fillOut($("[address]"), "address");
         </script>
     </body>
 </html>
