@@ -12,4 +12,8 @@ xcopy 'C:\Users\Administrator\Downloads\Web-Page-Design-main\htdocs\*' 'C:\xampp
 
 [i18n Google sheets](https://docs.google.com/spreadsheets/d/1sp-Rw0xcjd-nEMIacbVywY5zIlCbBGr-Ja9EF0DgJfg)
 
+[localhost SSL](https://www.barryblogs.com/xampp-localhost-ssl-certificate/)
+
+[MySQLAdmin](https://localhost/phpmyadmin/)
+
 [XAMPP 8.2.4](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.4/)
