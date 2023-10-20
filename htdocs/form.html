@@ -64,6 +64,7 @@
                 font-size: 22px;
                 margin-bottom: 8px;
                 margin-left: 180px;
+                margin-right: 180px;
                 margin-top: 8px;
                 padding-bottom: 12px;
                 padding-left: 32px;
@@ -93,6 +94,10 @@
                 text-indent: 120px;
                 /* margin-left: 120px; */
             }
+            levelTwoBlock {
+                text-indent: 240px;
+                /* margin-left: 120px; */
+            }
         </style>
         <!-- [source](https://gazette.nat.gov.tw/EG_FileManager/eguploadpub/eg026150/ch04/type3/gov30/num13/images/Eg01.pdf) -->
         <!-- [source](https://www.etax.nat.gov.tw/etwmain/api/functions/etw212w/download/18a49929f0e00000c88d77d84d4a57bf/%E7%A9%BA%E7%99%BD%E6%9B%B8%E8%A1%A8(pdf%E4%B8%AD%E8%8B%B1%E4%B8%A6%E5%88%97).pdf) -->
@@ -113,7 +118,7 @@
         <!-- date -->
         <flexrow>
             <fillTen></fillTen>
-            <div class=date i18n=date>2023/09/22</div>
+            <div class=date i18n=dateOfApplication>2023/09/22</div>
             <fillOne></fillOne>
         </flexrow>
         
@@ -129,9 +134,28 @@
                 <!-- <span select=true i18n=firstTime></span> -->
 
             <div class=content i18n=description></div>
-            <div class=subcontent>Handled in accordance with Article 5 of the Certified Public Bookkeepers Act and Rules Governing Issuance of Certificate of Public Bookkeeper.</div>
-            <div class=subcontent>The following documents are hereby inspected: (Please tick the attached items, see Note 2)</div>
+            <div class=subcontent i18n=descriptionA></div>
+            <div class=subcontent i18n=descriptionB></div>
+        </block>
+            
+        <levelTwoBlock>
+            <div class=subcontent i18n=descriptionBA></div>
+            <div class=subcontent i18n=descriptionBB></div>
+            <div class=subcontent i18n=descriptionBC></div>
+            <div class=subcontent i18n=descriptionBD></div>
+            <div class=subcontent i18n=descriptionBE></div>
+            <div class=subcontent i18n=descriptionBF></div>
+            <div class=subcontent i18n=descriptionBG></div>
+            <div class=subcontent i18n=descriptionBH></div>
+            <div class=subcontent i18n=descriptionBI></div>
+        </levelTwoBlock>
         
+        <block>
+            <div class=subcontent i18n=descriptionC></div>
+            <div class=subcontent i18n=descriptionCA></div>
+            <div class=subcontent i18n=descriptionCB></div>
+        </block>
+        <block>
             <div class=content i18n=information></div>
         </block>
 
@@ -249,7 +273,7 @@
                     }
                     
                     if (tag == "info") {
-                    obj.fillIn("name").append("<fillOne>").fillIn("identityCardNumber").append("<fillOne>");
+                    obj.fillIn("applicant").append("<fillOne>").fillIn("identityCardNumber").append("<fillOne>");
                     }
                     if (tag == "contact") {
                         obj.fillIn("contactNumber").append("<fillOne>").fillIn("phoneNumber").append("<fillOne>");
