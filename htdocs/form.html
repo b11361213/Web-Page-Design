@@ -262,6 +262,26 @@
                 $(o).on('click', fun);
                 return this;
             }
+            $.fn.applyForSelect = function(row) {
+                let o = this;
+                $(o).attr("row", "").prop("row", row);
+                let {dataFormFirstTime, dataFormCertificateHasCeased, dataFormLost, dataFormReplacement, dataFormEnglishVersion} = row;
+                let select, value;
+                $("[dataForm=dataFormFirstTime]", o).attr("select", dataFormFirstTime == "1" ? "true" : "false");
+                $("[dataForm=dataFormCertificateHasCeased]", o).attr("select", dataFormCertificateHasCeased == "1" ? "true" : "false");
+                $("[dataForm=dataFormLost]", o).attr("select", dataFormLost == "1" ? "true" : "false");
+                $("[dataForm=dataFormReplacement]", o).attr("select", dataFormReplacement == "1" ? "true" : "false");
+                $("[dataForm=dataFormEnglishVersion]", o).attr("select", dataFormEnglishVersion == "1" ? "true" : "false");
+            }
+            $.fn.applyForUpdate = function(value) {
+                let o = this;
+                let col = $(o).closest("[col]").attr("col");
+                let row = $(o).closest("[rows]").prop("rows");
+                let {primaryKey} = row;
+                $.post("query.php", {query: "modify", primaryKey, col, value}, function(msg) {
+                    console.log(msg);
+                })
+            }
             function applyForSel(obj) {
                 let i18ns = csvConvert(`firstTime, certificateHasCeased, lost, replacement, englishVersion`);
                 let dataForms = csvConvert(`dataFormFirstTime, dataFormCertificateHasCeased, dataFormLost, dataFormReplacement, dataFormEnglishVersion`);
@@ -279,19 +299,9 @@
                             select = 'false';
                         }
                         $(u).attr('select', select);
+                        $(u).applyForUpdate(select == "true" ? "1" : "0");
                     });
                 }
-            }
-            $.fn.applyForInsert = function(col) {
-                let o = this;
-                $(o).attr("col", "").prop("col", col);
-                let {dataFormFirstTime, dataFormCertificateHasCeased, dataFormLost, dataFormReplacement, dataFormEnglishVersion} = col;
-                let select, value;
-                $("[dataForm=dataFormFirstTime]", o).attr("select", dataFormFirstTime == "1" ? "true" : "false");
-                $("[dataForm=dataFormCertificateHasCeased]", o).attr("select", dataFormCertificateHasCeased == "1" ? "true" : "false");
-                $("[dataForm=dataFormLost]", o).attr("select", dataFormLost == "1" ? "true" : "false");
-                $("[dataForm=dataFormReplacement]", o).attr("select", dataFormReplacement == "1" ? "true" : "false");
-                $("[dataForm=dataFormEnglishVersion]", o).attr("select", dataFormEnglishVersion == "1" ? "true" : "false");
             }
             function residenceSel(obj) {
                 let i18ns = csvConvert(`
@@ -373,8 +383,8 @@
 
             $(document).ready(function() {
                 $.post("query.php", {query: "retrieve"}, function(element) {
-                    let {cols} = element, col = cols[0];
-                    $("[id=purpose]").applyForInsert(col);
+                    let {rows} = element, row = rows[0];
+                    $("[id=purpose]").applyForSelect(row);
                 }, "json")
             });
         </script>
