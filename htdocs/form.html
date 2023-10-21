@@ -218,9 +218,7 @@
         <div id=memo>推薦使用 Firefox 瀏覽器瀏覽本網頁，以獲得最佳體驗</div>
 
         <script>
-            function csvConvert(str) {
-                return str.split(",").map(x=>x.trim()).filter(x=>x);
-            }
+            function csvConvert(str) {return str.split(",").map(x=>x.trim()).filter(x=>x);}
             function langChange(obj) {
                 // change language
                 let lang = $(obj).text();
@@ -265,11 +263,12 @@
                 return this;
             }
             function applyForSel(obj) {
-                let items = csvConvert(`firstTime, certificateHasCeased, lost, replacement, englishVersion`);
+                let i18ns = csvConvert(`firstTime, certificateHasCeased, lost, replacement, englishVersion`);
+                let dataForms = csvConvert(`dataFormFirstTime, dataFormCertificateHasCeased, dataFormLost, dataFormReplacement, dataFormEnglishVersion`);
                 // let items = ["firstTime", "certificateHasCeased", "lost", "replacement", "englishVersion"];
 
-                for (let item of items) {
-                    $(`<div class=indentSubcontent select=false i18n=${item}></div>`).appendTo(obj).OnClick(function(e) {
+                for (let index = 0; index < i18ns.length; index++) {
+                    $(`<div class=indentSubcontent select=false i18n=${i18ns[index]} dataForm=${dataForms[index]}></div>`).appendTo(obj).OnClick(function(e) {
                         let u = e.currentTarget;
                         let select = $(u).attr('select');
                         if (select == 'false') {
@@ -283,8 +282,19 @@
                     });
                 }
             }
+            $.fn.applyForInsert = function(col) {
+                let o = this;
+                $(o).attr("col", "").prop("col", col);
+                let {dataFormFirstTime, dataFormCertificateHasCeased, dataFormLost, dataFormReplacement, dataFormEnglishVersion} = col;
+                let select, value;
+                $("[dataForm=dataFormFirstTime]", o).attr("select", dataFormFirstTime == "1" ? "true" : "false");
+                $("[dataForm=dataFormCertificateHasCeased]", o).attr("select", dataFormCertificateHasCeased == "1" ? "true" : "false");
+                $("[dataForm=dataFormLost]", o).attr("select", dataFormLost == "1" ? "true" : "false");
+                $("[dataForm=dataFormReplacement]", o).attr("select", dataFormReplacement == "1" ? "true" : "false");
+                $("[dataForm=dataFormEnglishVersion]", o).attr("select", dataFormEnglishVersion == "1" ? "true" : "false");
+            }
             function residenceSel(obj) {
-                let citiesAndCounties = csvConvert(`
+                let i18ns = csvConvert(`
                     taipeiCity, keelungCity, newTaipeiCity, lienchiangCounty, 
                     yilanCounty, hsinchuCity, hsinchuCounty, taoyuanCity, 
                     miaoliCounty, taichungCity, changhuaCounty, nantouCounty, 
@@ -293,8 +303,17 @@
                     taitungCounty, hualienCounty
                     `);
 
-                for (let cityAndCounty of citiesAndCounties) {
-                    $(`<span style=white-space: nowrap select=false i18n=${cityAndCounty} id=checkboxOption></div>`).appendTo(obj).OnClick(function(e) {
+                let dataForms = csvConvert(`
+                    dataFormTaipeiCity, dataFormKeelungCity, dataFormNewTaipeiCity, dataFormLienchiangCounty, 
+                    dataFormYilanCounty, dataFormHsinchuCity, dataFormHsinchuCounty, dataFormTaoyuanCity, 
+                    dataFormMiaoliCounty, dataFormTaichungCity, dataFormChanghuaCounty, dataFormNantouCounty, 
+                    dataFormChiayiCity, dataFormChiayiCounty, dataFormYunlinCounty, dataFormTainanCity, 
+                    dataFormKaohsiungCity, dataFormPenghuCounty, dataFormKinmenCounty, dataFormPingtungCounty, 
+                    dataFormTaitungCounty, dataFormHualienCounty
+                    `);
+
+                for (let index = 0; index < i18ns.length; index++) {
+                    $(`<span style=white-space: nowrap select=false i18n=${i18ns[index]} dataForm=${dataForms[index]} id=checkboxOption></div>`).appendTo(obj).OnClick(function(e) {
                         let u = e.currentTarget;
                         let select = $(u).attr('select');
                         if (select == 'false') {
@@ -351,6 +370,13 @@
             fillOut($("[information]"), "info");
             fillOut($("[contact]"), "contact");
             fillOut($("[address]"), "address");
+
+            $(document).ready(function() {
+                $.post("query.php", {query: "retrieve"}, function(element) {
+                    let {cols} = element, col = cols[0];
+                    $("[id=purpose]").applyForInsert(col);
+                }, "json")
+            });
         </script>
     </body>
 </html>
