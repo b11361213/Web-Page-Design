@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html translate="no" lang=zh-Hans-TW >
+<html translate="no" lang=zh-Hans-TW>
     <head>
         <link rel="icon" type="image/gif" href="image/konata.gif">
         <link rel="stylesheet" type="text/css" href="i18n-items.css" />
@@ -32,40 +32,55 @@
                 font-size: 16px;
             }
             [class=title] {
-                font-family: NotoSefif;
+                font-family: EduKai;
                 font-size: 36px;
-                text-align: center;
-                margin-top: 28px;
+                font-weight: 700;
                 margin-bottom: 28px;
+                margin-top: 28px;
+                text-align: center;
 }
             [class=date] {
                 font-family: NotoSefif;
                 font-size: 18px;
-                text-align: left;
                 margin-bottom: 14px;
+                text-align: left;
             }
             [class=content] {
-                font-family: NotoSefif;
-                font-size: 22px;
+                font-family: EduKai;
+                font-size: 24px;
+                font-weight: 700;
                 text-align: left;
                 margin-bottom: 8px;
                 margin-top: 10px;
             }
-            [class=subcontent] {
-                font-family: NotoSefif;
-                font-size: 22px;
+            [class=indentSubcontent] {
+                font-family: EduKai;
+                font-size: 24px;
+                font-weight: 400;
+                margin-bottom: 12px;
+                margin-top: 12px;
                 text-align: left;
-                text-indent: 180px;
+                text-indent: 160px;
+            }
+            [class=subContent] {
+                /* text-indent: 180px; */
+                font-family: EduKai;
+                font-size: 24px;
+                font-weight: 400;
+                margin-bottom: 12px;
+                margin-top: 12px;
+                text-align: left;
             }
             [class=subForm] {
                 /* background-color: azure; */
                 border: solid 1px;
-                font-family: NotoSefif;
+                font-family: EduKai;
                 font-size: 22px;
-                margin-bottom: 8px;
+                font-weight: 400;
+                margin-bottom: 12px;
                 margin-left: 180px;
                 margin-right: 180px;
-                margin-top: 8px;
+                margin-top: 12px;
                 padding-bottom: 12px;
                 padding-left: 32px;
                 padding-top: 12px;
@@ -84,19 +99,20 @@
                 display: flex;
                 flex-direction: row;
             }
-            fillTen {
+            fill010 {
                 flex-grow: 10;
             }
-            fillOne {
+            fill001 {
                 flex-grow: 1;
             }
-            block {
+            indentTitle {
                 text-indent: 120px;
-                /* margin-left: 120px; */
             }
-            levelTwoBlock {
-                text-indent: 240px;
-                /* margin-left: 120px; */
+            indentContent001 {
+                text-indent: 160px;
+            }
+            indentContent002 {
+                text-indent: 200px;
             }
         </style>
         <!-- [source](https://gazette.nat.gov.tw/EG_FileManager/eguploadpub/eg026150/ch04/type3/gov30/num13/images/Eg01.pdf) -->
@@ -117,47 +133,61 @@
 
         <!-- date -->
         <flexrow>
-            <fillTen></fillTen>
+            <fill010></fill010>
             <div class=date i18n=dateOfApplication>2023/09/22</div>
-            <fillOne></fillOne>
+            <fill001></fill001>
         </flexrow>
         
         <!-- content -->
-        <block>
+        <!-- recipient -->
+        <indentTitle>
             <div class=content i18n=recipient>
                 <span class=content i18n=ministryOfFinance></span>
             </div>
-            
+        </indentTitle>
+        
+        <!-- purpose -->
+        <indentTitle>
             <div class=content i18n=purpose>
                 <span class=content i18n=toApplyFor></span>
             </div>
-                <!-- <span select=true i18n=firstTime></span> -->
+            <div class=indentSubcontent id=purpose></div>
+        </indentTitle>
 
+        <!-- description -->
+        <indentTitle>
             <div class=content i18n=description></div>
-            <div class=subcontent i18n=descriptionA></div>
-            <div class=subcontent i18n=descriptionB></div>
-        </block>
-            
-        <levelTwoBlock>
-            <div class=subcontent i18n=descriptionBA></div>
-            <div class=subcontent i18n=descriptionBB></div>
-            <div class=subcontent i18n=descriptionBC></div>
-            <div class=subcontent i18n=descriptionBD></div>
-            <div class=subcontent i18n=descriptionBE></div>
-            <div class=subcontent i18n=descriptionBF></div>
-            <div class=subcontent i18n=descriptionBG></div>
-            <div class=subcontent i18n=descriptionBH></div>
-            <div class=subcontent i18n=descriptionBI></div>
-        </levelTwoBlock>
         
-        <block>
-            <div class=subcontent i18n=descriptionC></div>
-            <div class=subcontent i18n=descriptionCA></div>
-            <div class=subcontent i18n=descriptionCB></div>
-        </block>
-        <block>
-            <div class=content i18n=information></div>
-        </block>
+            <indentContent001>
+                <div class=subContent i18n=descriptionA></div>
+                <div class=subContent i18n=descriptionB></div>
+                <indentContent002>
+                    <div class=subContent i18n=descriptionBA></div>
+                    <div class=subContent i18n=descriptionBB></div>
+                    <div class=subContent i18n=descriptionBC></div>
+                    <div class=subContent i18n=descriptionBD></div>
+                    <div class=subContent i18n=descriptionBE></div>
+                    <div class=subContent i18n=descriptionBF></div>
+                    <div class=subContent i18n=descriptionBG></div>
+                    <div class=subContent i18n=descriptionBH></div>
+                    <div class=subContent i18n=descriptionBI></div>
+                </indentContent002>
+            </indentContent001>
+
+            
+            <indentContent001>
+                <div class=subContent i18n=descriptionC></div>
+                <indentContent002>
+                    <div class=subContent i18n=descriptionCA></div>
+                    <div class=subContent i18n=descriptionCB></div>
+                </indentContent002>
+            </indentContent001>
+        </indentTitle>
+        
+        <!-- information -->
+        <indentTitle>
+            <div class=content i18n=applicantInformation></div>
+        </indentTitle>
 
         <!-- information form -->
         <div class=subForm>
@@ -187,27 +217,59 @@
         <!-- footer memo -->
         <div id=memo>推薦使用 Firefox 瀏覽器瀏覽本網頁，以獲得最佳體驗</div>
 
-        <script>          
+        <script>
+            function csvConvert(str) {
+                return str.split(",").map(x=>x.trim()).filter(x=>x);
+            }
             function langChange(obj) {
-                let str = $(obj).text();
-                // console.log(str);
-                $("body").attr("language", str);
-            }       
+                // change language
+                let lang = $(obj).text();
+                $("body").attr("language", lang);
+                
+                // change font and size
+                let elems = "title, content, indentSubcontent, subContent, subForm";
+                elems = csvConvert(elems);
+                for (let elemsArray of elems) {
+                    let elem = document.querySelectorAll(`[class=${elemsArray}]`);
+                    for (let elemItem of elem) {
+                        // elemItem.style = lang=="Chinese" ? "font-family: EduKai;" : "font-family: NotoSefif;";
+                        elemItem.style.fontFamily = lang == "Chinese" ? "EduKai" : "NotoSefif";
+                        switch (elemsArray) {
+                            case "title":
+                                elemItem.style.fontSize = lang == "Chinese" ? "36px" : "30px";
+                                break;
+                            case "content":
+                                elemItem.style.fontSize = lang == "Chinese" ? "24px" : "22px";
+                                break;
+                            case "indentSubcontent":
+                                elemItem.style.fontSize = lang == "Chinese" ? "24px" : "22px";
+                                break;
+                            case "subContent":
+                                elemItem.style.fontSize = lang == "Chinese" ? "24px" : "22px";
+                                break;
+                            case "subForm":
+                                elemItem.style.fontSize = lang == "Chinese" ? "22px" : "20px";
+                            //     break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                // [透過 JavaScript 動態修改CSS 樣式、屬性 - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天](https://ithelp.ithome.com.tw/articles/10226003)
+                // [DOM CSS 修改 CSS 樣式 - JavaScript (JS) 教學 Tutorial](https://www.fooish.com/javascript/dom/css.html)
+            }
             $.fn.OnClick = function(fun) {
                 let o = this;
                 $(o).css('cursor', 'pointer');
                 $(o).on('click', fun);
                 return this;
             }
-            function csvConvert(str) {
-                return str.split(",").map(x=>x.trim()).filter(x=>x);
-            }
             function applyForSel(obj) {
                 let items = csvConvert(`firstTime, certificateHasCeased, lost, replacement, englishVersion`);
                 // let items = ["firstTime", "certificateHasCeased", "lost", "replacement", "englishVersion"];
 
                 for (let item of items) {
-                    $(`<div class=subcontent select=false i18n=${item}></div>`).appendTo(obj).OnClick(function(e) {
+                    $(`<div class=indentSubcontent select=false i18n=${item}></div>`).appendTo(obj).OnClick(function(e) {
                         let u = e.currentTarget;
                         let select = $(u).attr('select');
                         if (select == 'false') {
@@ -283,7 +345,7 @@
                     }
                 }
 
-            applyForSel($("[i18n=purpose]"));
+            applyForSel($("[id=purpose]"));
             residenceSel($("[residence]"));
 
             fillOut($("[information]"), "info");

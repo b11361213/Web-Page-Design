@@ -4,7 +4,7 @@
 
     $rows = mysqli_query($CONN, "SELECT * FROM dataform");
     while($row = $rows -> fetch_assoc()) {
-        print_r($row);
+        print_r( json_encode($row, JSON_UNESCAPED_UNICODE) );
     }
     $rows -> free_result();
     $CONN -> close();

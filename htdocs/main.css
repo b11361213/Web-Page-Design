@@ -2,3 +2,7 @@
     font-family: NotoSefif;
     src: url("font/NotoSerifTC-Regular.otf");
 }
+@font-face {
+    font-family: EduKai;
+    src: url("font/edukai-4.0.ttf");
+}
