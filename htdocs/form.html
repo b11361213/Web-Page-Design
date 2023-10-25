@@ -27,11 +27,11 @@
                 display: flex;
                 padding-right: 50px;
             }
-            [class=langSelect] {
+            [class="langSelect"] {
                 font-family: NotoSefif;
                 font-size: 16px;
             }
-            [class=title] {
+            [class="title"] {
                 font-family: EduKai;
                 font-size: 36px;
                 font-weight: 700;
@@ -39,13 +39,13 @@
                 margin-top: 28px;
                 text-align: center;
             }
-            [class=date] {
+            [class="date"] {
                 font-family: NotoSefif;
                 font-size: 18px;
                 margin-bottom: 14px;
                 text-align: left;
             }
-            [class=content] {
+            [class="content"] {
                 font-family: EduKai;
                 font-size: 24px;
                 font-weight: 700;
@@ -53,7 +53,7 @@
                 margin-bottom: 8px;
                 margin-top: 10px;
             }
-            [class=indentSubcontent] {
+            [class="indentSubcontent"] {
                 font-family: EduKai;
                 font-size: 24px;
                 font-weight: 400;
@@ -62,7 +62,7 @@
                 text-align: left;
                 text-indent: 160px;
             }
-            [class=subContent] {
+            [class="subContent"] {
                 /* text-indent: 180px; */
                 font-family: EduKai;
                 font-size: 24px;
@@ -71,7 +71,7 @@
                 margin-top: 12px;
                 text-align: left;
             }
-            [class=subForm] {
+            [class="subForm"] {
                 /* background-color: azure; */
                 border: solid 1px;
                 font-family: EduKai;
@@ -122,75 +122,75 @@
         <!-- [i18n Google sheets](https://docs.google.com/spreadsheets/d/1sp-Rw0xcjd-nEMIacbVywY5zIlCbBGr-Ja9EF0DgJfg) -->
     </head>
     <body language="Chinese">
-        <span class=langSelect>Language select --</span>
-        <span class=langSelect langSelect>
+        <span class="langSelect">Language select --</span>
+        <span class="langSelect" langSelect>
             <span onclick="langChange(this);">Chinese</span>
             <span onclick="langChange(this);">English</span>
         </span>
         
         <!-- title -->
-        <div class=title i18n=header></div>
+        <div class="title" i18n="header"></div>
 
         <!-- date -->
         <flexrow>
             <fill010></fill010>
-            <div class=date i18n=dateOfApplication>2023/09/22</div>
+            <div class="date" i18n="dateOfApplication">2023/09/22</div>
             <fill001></fill001>
         </flexrow>
         
         <!-- content -->
         <!-- recipient -->
         <indentTitle>
-            <div class=content i18n=recipient>
-                <span class=content i18n=ministryOfFinance></span>
+            <div class="content" i18n="recipient">
+                <span class="content" i18n="ministryOfFinance"></span>
             </div>
         </indentTitle>
         
         <!-- purpose -->
         <indentTitle>
-            <div class=content i18n=purpose>
-                <span class=content i18n=toApplyFor></span>
+            <div class="content" i18n="purpose">
+                <span class="content" i18n="toApplyFor"></span>
             </div>
-            <div class=indentSubcontent id=toApplyFor></div>
+            <div class="indentSubcontent" id="toApplyFor"></div>
         </indentTitle>
 
         <!-- description -->
         <indentTitle>
-            <div class=content i18n=description></div>
+            <div class="content" i18n="description"></div>
         
             <indentContent001>
-                <div class=subContent i18n=descriptionA></div>
-                <div class=subContent i18n=descriptionB></div>
+                <div class="subContent" i18n="descriptionA"></div>
+                <div class="subContent" i18n="descriptionB"></div>
                 <indentContent002>
-                    <div class=subContent i18n=descriptionBA></div>
-                    <div class=subContent i18n=descriptionBB></div>
-                    <div class=subContent i18n=descriptionBC></div>
-                    <div class=subContent i18n=descriptionBD></div>
-                    <div class=subContent i18n=descriptionBE></div>
-                    <div class=subContent i18n=descriptionBF></div>
-                    <div class=subContent i18n=descriptionBG></div>
-                    <div class=subContent i18n=descriptionBH></div>
-                    <div class=subContent i18n=descriptionBI></div>
+                    <div class="subContent" i18n="descriptionBA"></div>
+                    <div class="subContent" i18n="descriptionBB"></div>
+                    <div class="subContent" i18n="descriptionBC"></div>
+                    <div class="subContent" i18n="descriptionBD"></div>
+                    <div class="subContent" i18n="descriptionBE"></div>
+                    <div class="subContent" i18n="descriptionBF"></div>
+                    <div class="subContent" i18n="descriptionBG"></div>
+                    <div class="subContent" i18n="descriptionBH"></div>
+                    <div class="subContent" i18n="descriptionBI"></div>
                 </indentContent002>
             </indentContent001>
 
             
             <indentContent001>
-                <div class=subContent i18n=descriptionC></div>
+                <div class="subContent" i18n="descriptionC"></div>
                 <indentContent002>
-                    <div class=subContent i18n=descriptionCA></div>
-                    <div class=subContent i18n=descriptionCB></div>
+                    <div class="subContent" i18n="descriptionCA"></div>
+                    <div class="subContent" i18n="descriptionCB"></div>
                 </indentContent002>
             </indentContent001>
         </indentTitle>
         
         <!-- information -->
         <indentTitle>
-            <div class=content i18n=applicantInformation></div>
+            <div class="content" i18n="applicantInformation"></div>
         </indentTitle>
 
         <!-- information form -->
-        <div class=subForm>
+        <div class="subForm">
             <flexrow information>
                 <!-- <span i18n=name></span>
                 <span content></span>
@@ -200,53 +200,53 @@
         </div>
         
         <!-- contact form -->
-        <div class=subForm>
+        <div class="subForm">
             <flexrow contact></flexrow>
         </div>
         
         <!-- residence -->
-        <div class=subForm i18n=residence>
+        <div class="subForm" i18n="residence">
             <flexrow style="flex-wrap: wrap;" residence></flexrow>
         </div>
         
         <!-- address form -->
-        <div class=subForm>
+        <div class="subForm">
             <flexrow address></flexrow>
         </div>
 
         <!-- footer memo -->
-        <div id=memo>推薦使用 Firefox 瀏覽器瀏覽本網頁，以獲得最佳體驗</div>
+        <div id="memo">推薦使用 Firefox 瀏覽器瀏覽本網頁，以獲得最佳體驗</div>
 
         <script>
-            function csvConvert(str) {return str.split(",").map(x=>x.trim()).filter(x=>x);}
+            function csvConvert(str) {return str.split(',').map(x=>x.trim()).filter(x=>x);}
             function langChange(obj) {
                 // change language
                 let lang = $(obj).text();
-                $("body").attr("language", lang);
+                $('body').attr('language', lang);
                 
                 // change font and size
-                let elems = "title, content, indentSubcontent, subContent, subForm";
+                let elems = 'title, content, indentSubcontent, subContent, subForm';
                 elems = csvConvert(elems);
                 for (let elemsArray of elems) {
                     let elem = document.querySelectorAll(`[class=${elemsArray}]`);
                     for (let elemItem of elem) {
-                        // elemItem.style = lang=="Chinese" ? "font-family: EduKai;" : "font-family: NotoSefif;";
-                        elemItem.style.fontFamily = lang == "Chinese" ? "EduKai" : "NotoSefif";
+                        // elemItem.style = lang=='Chinese' ? 'font-family: EduKai;' : 'font-family: NotoSefif;';
+                        elemItem.style.fontFamily = lang == 'Chinese' ? 'EduKai' : 'NotoSefif';
                         switch (elemsArray) {
-                            case "title":
-                                elemItem.style.fontSize = lang == "Chinese" ? "36px" : "30px";
+                            case 'title':
+                                elemItem.style.fontSize = lang == 'Chinese' ? '36px' : '30px';
                                 break;
-                            case "content":
-                                elemItem.style.fontSize = lang == "Chinese" ? "24px" : "22px";
+                            case 'content':
+                                elemItem.style.fontSize = lang == 'Chinese' ? '24px' : '22px';
                                 break;
-                            case "indentSubcontent":
-                                elemItem.style.fontSize = lang == "Chinese" ? "24px" : "22px";
+                            case 'indentSubcontent':
+                                elemItem.style.fontSize = lang == 'Chinese' ? '24px' : '22px';
                                 break;
-                            case "subContent":
-                                elemItem.style.fontSize = lang == "Chinese" ? "24px" : "22px";
+                            case 'subContent':
+                                elemItem.style.fontSize = lang == 'Chinese' ? '24px' : '22px';
                                 break;
-                            case "subForm":
-                                elemItem.style.fontSize = lang == "Chinese" ? "22px" : "20px";
+                            case 'subForm':
+                                elemItem.style.fontSize = lang == 'Chinese' ? '22px' : '20px';
                             //     break;
                             default:
                                 break;
@@ -264,12 +264,12 @@
             }
             $.fn.dataFormUpdate = function(value) {
                 let o = this;
-                let col = $(o).closest("[dataForm]").attr("dataForm");
+                let col = $(o).closest('[dataForm]').attr('dataForm');
                 console.log(col);
-                let row = $(o).closest("[row]").prop("row");
+                let row = $(o).closest('[row]').prop('row');
                 console.log(row);
                 let {dataFormPrimaryKey} = row;
-                $.post("query.php", {query: "modify", dataFormPrimaryKey, col, value}, function(msg) {
+                $.post('query.php', {query: 'modify', dataFormPrimaryKey, col, value}, function(msg) {
                     console.log(msg);
                 })
             }
@@ -277,22 +277,22 @@
             // 申請...
             $.fn.applyForSelect = function(row) {
                 let o = this;
-                $(o).attr("row", "").prop("row", row);
+                $(o).attr('row', '').prop('row', row);
                 let {dataFormFirstTime, dataFormCertificateHasCeased, dataFormLost, dataFormReplacement, dataFormEnglishVersion} = row;
                 // let select, value;
-                $("[dataForm=dataFormFirstTime]", o).attr("select", dataFormFirstTime == "1" ? "true" : "false");
-                $("[dataForm=dataFormCertificateHasCeased]", o).attr("select", dataFormCertificateHasCeased == "1" ? "true" : "false");
-                $("[dataForm=dataFormLost]", o).attr("select", dataFormLost == "1" ? "true" : "false");
-                $("[dataForm=dataFormReplacement]", o).attr("select", dataFormReplacement == "1" ? "true" : "false");
-                $("[dataForm=dataFormEnglishVersion]", o).attr("select", dataFormEnglishVersion == "1" ? "true" : "false");
+                $('[dataForm="dataFormFirstTime"]',               o).attr('select', dataFormFirstTime             == '1' ? 'true' : 'false');
+                $('[dataForm="dataFormCertificateHasCeased"]',    o).attr('select', dataFormCertificateHasCeased  == '1' ? 'true' : 'false');
+                $('[dataForm="dataFormLost"]',                    o).attr('select', dataFormLost                  == '1' ? 'true' : 'false');
+                $('[dataForm="dataFormReplacement"]',             o).attr('select', dataFormReplacement           == '1' ? 'true' : 'false');
+                $('[dataForm="dataFormEnglishVersion"]',          o).attr('select', dataFormEnglishVersion        == '1' ? 'true' : 'false');
             }
             function applyForSel(obj) {
                 let i18ns = csvConvert(`firstTime, certificateHasCeased, lost, replacement, englishVersion`);
                 let dataForms = csvConvert(`dataFormFirstTime, dataFormCertificateHasCeased, dataFormLost, dataFormReplacement, dataFormEnglishVersion`);
-                // let items = ["firstTime", "certificateHasCeased", "lost", "replacement", "englishVersion"];
+                // let items = ['firstTime', 'certificateHasCeased', 'lost', 'replacement', 'englishVersion'];
 
                 for (let index = 0; index < i18ns.length; index++) {
-                    $(`<div class=indentSubcontent select=false i18n=${i18ns[index]} dataForm=${dataForms[index]}></div>`).appendTo(obj).OnClick(function(e) {
+                    $(`<div class="indentSubcontent" select="false" i18n="${i18ns[index]}" dataForm="${dataForms[index]}"></div>`).appendTo(obj).OnClick(function(e) {
                         let u = e.currentTarget;
                         let select = $(u).attr('select');
                         if (select == 'false') {
@@ -303,7 +303,7 @@
                             select = 'false';
                         }
                         $(u).attr('select', select);
-                        $(u).dataFormUpdate(select == "true" ? "1" : "0");
+                        $(u).dataFormUpdate(select == 'true' ? '1' : '0');
                     });
                 }
             }
@@ -311,32 +311,32 @@
             // 申請人資料...
             $.fn.fillInSelect = function(row) {
                 let o = this;
-                $(o).attr("row", "").prop("row", row);
+                $(o).attr('row', '').prop('row', row);
                 let {dataFormApplicant, dataFormIdentityCardNumber, dataFormContactNumber, dataFormPhoneNumber, dataFormAddress} = row;
                 // let value = dataFormApplicant;
-                // $("[dataForm=dataFormApplicant]").html(value);
-                $("[dataForm=dataFormApplicant]").html(dataFormApplicant);
-                $("[dataForm=dataFormIdentityCardNumber]").html(dataFormIdentityCardNumber);
-                $("[dataForm=dataFormContactNumber]").html(dataFormContactNumber);
-                $("[dataForm=dataFormPhoneNumber]").html(dataFormPhoneNumber);
-                $("[dataForm=dataFormAddress]").html(dataFormAddress);
+                // $('[dataForm=dataFormApplicant]').html(value);
+                $('[dataForm="dataFormApplicant"]'            ).html(dataFormApplicant);
+                $('[dataForm="dataFormIdentityCardNumber"]'   ).html(dataFormIdentityCardNumber);
+                $('[dataForm="dataFormContactNumber"]'        ).html(dataFormContactNumber);
+                $('[dataForm="dataFormPhoneNumber"]'          ).html(dataFormPhoneNumber);
+                $('[dataForm="dataFormAddress"]'              ).html(dataFormAddress);
             }
             function fillOut(obj, tag) {
                 $.fn.fillIn = function(i18n, dataForm) {
                     let obj = this;
                     let value = 5050;
                     $(`
-                    <span i18n=${i18n} title></span>
+                    <span i18n="${i18n}" title></span>
                     `).appendTo(obj);
                     $(`
-                    <span dataForm=${dataForm} content>${value}</span>
+                    <span dataForm="${dataForm}" content>${value}</span>
                     `).appendTo(obj).OnClick((e)=>{
                         let u = $(e.currentTarget);
-                        let old = u.html(); u.html("");
-                        let tbox = $("<textarea rows=1 cols=12>").html(old).appendTo(u).OnClick((e)=>{
+                        let old = u.html(); u.html('');
+                        let tbox = $('<textarea rows=1 cols=12>').html(old).appendTo(u).OnClick((e)=>{
                                 let o = $(e.currentTarget);
                                 e.stopPropagation();
-                            }).on("blur", e=>{
+                            }).on('blur', e=>{
                                 let tbox = e.currentTarget;
                                 $(u).html($(tbox).val());
                                 $(u).dataFormUpdate($(tbox).val());
@@ -348,19 +348,19 @@
                         return this;
                     }
 
-                if (tag == "info") {
-                obj.fillIn("applicant", "dataFormApplicant").append("<fillOne>").fillIn("identityCardNumber", "dataFormIdentityCardNumber").append("<fillOne>");
+                if (tag == 'info') {
+                obj.fillIn('applicant', 'dataFormApplicant').append('<fillOne>').fillIn('identityCardNumber', 'dataFormIdentityCardNumber').append('<fillOne>');
                 }
-                if (tag == "contact") {
-                    obj.fillIn("contactNumber", "dataFormContactNumber").append("<fillOne>").fillIn("phoneNumber", "dataFormPhoneNumber").append("<fillOne>");
+                if (tag == 'contact') {
+                    obj.fillIn('contactNumber', 'dataFormContactNumber').append('<fillOne>').fillIn('phoneNumber', 'dataFormPhoneNumber').append('<fillOne>');
                 }
-                if (tag == "address") {
-                    obj.fillIn("address", "dataFormAddress").append("<fillOne>");
+                if (tag == 'address') {
+                    obj.fillIn('address', 'dataFormAddress').append('<fillOne>');
                 }
             }
             $.fn.residenceSelect = function(row) {
                 let o = this;
-                $(o).attr("row", "").prop("row", row);
+                $(o).attr('row', '').prop('row', row);
                 let {dataFormResidence} = row;
 
                 // let dataForms = csvConvert(`
@@ -381,36 +381,36 @@
                 //     `);
 
                 // for (let index = 0; index < dataForms.length; index++) {
-                //     $(`"[dataForm=${dataForms[index]}]"`, `${o}`).attr("select", `${dataFormResidence}` == `"${values[index]}"` ? "true" : "false")
+                //     $(`'[dataForm=${dataForms[index]}]'`, `${o}`).attr('select', `${dataFormResidence}` == `'${values[index]}'` ? 'true' : 'false')
                 // }
 
-                $("[dataForm=dataFormTaipeiCity]",          o).attr("select", dataFormResidence == "台北市" ? "true" : "false");
-                $("[dataForm=dataFormKeelungCity]",         o).attr("select", dataFormResidence == "基隆市" ? "true" : "false");
-                $("[dataForm=dataFormNewTaipeiCity]",       o).attr("select", dataFormResidence == "新北市" ? "true" : "false");
-                $("[dataForm=dataFormLienchiangCounty]",    o).attr("select", dataFormResidence == "連江縣" ? "true" : "false");
+                $('[valueIndex="dataFormTaipeiCity"]',          o).attr('select', dataFormResidence == '台北市' ? 'true' : 'false');
+                $('[valueIndex="dataFormKeelungCity"]',         o).attr('select', dataFormResidence == '基隆市' ? 'true' : 'false');
+                $('[valueIndex="dataFormNewTaipeiCity"]',       o).attr('select', dataFormResidence == '新北市' ? 'true' : 'false');
+                $('[valueIndex="dataFormLienchiangCounty"]',    o).attr('select', dataFormResidence == '連江縣' ? 'true' : 'false');
 
-                $("[dataForm=dataFormYilanCounty]",         o).attr("select", dataFormResidence == "宜蘭縣" ? "true" : "false");
-                $("[dataForm=dataFormHsinchuCity]",         o).attr("select", dataFormResidence == "新竹市" ? "true" : "false");
-                $("[dataForm=dataFormHsinchuCounty]",       o).attr("select", dataFormResidence == "新竹縣" ? "true" : "false");
-                $("[dataForm=dataFormTaoyuanCity]",         o).attr("select", dataFormResidence == "桃園市" ? "true" : "false");
+                $('[valueIndex="dataFormYilanCounty"]',         o).attr('select', dataFormResidence == '宜蘭縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormHsinchuCity"]',         o).attr('select', dataFormResidence == '新竹市' ? 'true' : 'false');
+                $('[valueIndex="dataFormHsinchuCounty"]',       o).attr('select', dataFormResidence == '新竹縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormTaoyuanCity"]',         o).attr('select', dataFormResidence == '桃園市' ? 'true' : 'false');
 
-                $("[dataForm=dataFormMiaoliCounty]",        o).attr("select", dataFormResidence == "苗栗縣" ? "true" : "false");
-                $("[dataForm=dataFormTaichungCity]",        o).attr("select", dataFormResidence == "台中市" ? "true" : "false");
-                $("[dataForm=dataFormChanghuaCounty]",      o).attr("select", dataFormResidence == "彰化縣" ? "true" : "false");
-                $("[dataForm=dataFormNantouCounty]",        o).attr("select", dataFormResidence == "南投縣" ? "true" : "false");
+                $('[valueIndex="dataFormMiaoliCounty"]',        o).attr('select', dataFormResidence == '苗栗縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormTaichungCity"]',        o).attr('select', dataFormResidence == '台中市' ? 'true' : 'false');
+                $('[valueIndex="dataFormChanghuaCounty"]',      o).attr('select', dataFormResidence == '彰化縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormNantouCounty"]',        o).attr('select', dataFormResidence == '南投縣' ? 'true' : 'false');
                 
-                $("[dataForm=dataFormChiayiCity]",          o).attr("select", dataFormResidence == "嘉義市" ? "true" : "false");
-                $("[dataForm=dataFormChiayiCounty]",        o).attr("select", dataFormResidence == "嘉義縣" ? "true" : "false");
-                $("[dataForm=dataFormYunlinCounty]",        o).attr("select", dataFormResidence == "雲林縣" ? "true" : "false");
-                $("[dataForm=dataFormTainanCity]",          o).attr("select", dataFormResidence == "台南市" ? "true" : "false");
+                $('[valueIndex="dataFormChiayiCity"]',          o).attr('select', dataFormResidence == '嘉義市' ? 'true' : 'false');
+                $('[valueIndex="dataFormChiayiCounty"]',        o).attr('select', dataFormResidence == '嘉義縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormYunlinCounty"]',        o).attr('select', dataFormResidence == '雲林縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormTainanCity"]',          o).attr('select', dataFormResidence == '台南市' ? 'true' : 'false');
                 
-                $("[dataForm=dataFormKaohsiungCity]",       o).attr("select", dataFormResidence == "高雄市" ? "true" : "false");
-                $("[dataForm=dataFormPenghuCounty]",        o).attr("select", dataFormResidence == "澎湖縣" ? "true" : "false");
-                $("[dataForm=dataFormKinmenCounty]",        o).attr("select", dataFormResidence == "金門縣" ? "true" : "false");
-                $("[dataForm=dataFormPingtungCounty]",      o).attr("select", dataFormResidence == "屏東縣" ? "true" : "false");
+                $('[valueIndex="dataFormKaohsiungCity"]',       o).attr('select', dataFormResidence == '高雄市' ? 'true' : 'false');
+                $('[valueIndex="dataFormPenghuCounty"]',        o).attr('select', dataFormResidence == '澎湖縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormKinmenCounty"]',        o).attr('select', dataFormResidence == '金門縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormPingtungCounty"]',      o).attr('select', dataFormResidence == '屏東縣' ? 'true' : 'false');
                 
-                $("[dataForm=dataFormTaitungCounty]",       o).attr("select", dataFormResidence == "台東縣" ? "true" : "false");
-                $("[dataForm=dataFormHualienCounty]",       o).attr("select", dataFormResidence == "花蓮縣" ? "true" : "false");
+                $('[valueIndex="dataFormTaitungCounty"]',       o).attr('select', dataFormResidence == '台東縣' ? 'true' : 'false');
+                $('[valueIndex="dataFormHualienCounty"]',       o).attr('select', dataFormResidence == '花蓮縣' ? 'true' : 'false');
             }
             function residenceSel(obj) {
                 let i18ns = csvConvert(`
@@ -422,7 +422,7 @@
                     taitungCounty, hualienCounty
                     `);
 
-                let dataForms = csvConvert(`
+                let valueIndex = csvConvert(`
                     dataFormTaipeiCity, dataFormKeelungCity, dataFormNewTaipeiCity, dataFormLienchiangCounty, 
                     dataFormYilanCounty, dataFormHsinchuCity, dataFormHsinchuCounty, dataFormTaoyuanCity, 
                     dataFormMiaoliCounty, dataFormTaichungCity, dataFormChanghuaCounty, dataFormNantouCounty, 
@@ -440,7 +440,7 @@
                     `);
 
                 for (let index = 0; index < i18ns.length; index++) {
-                    $(`<span style=white-space: nowrap select=false i18n=${i18ns[index]} dataForm=${dataForms[index]} id=checkboxOption></div>`).appendTo(obj).OnClick(function(e) {
+                    $(`<span style=white-space: nowrap select="false" i18n="${i18ns[index]}" dataForm="dataFormResidence" valueIndex="${valueIndex[index]}" id="checkboxOption"></div>`).appendTo(obj).OnClick(function(e) {
                         let u = e.currentTarget;
                         let select = $(u).attr('select');
                         if (select == 'false') {
@@ -451,29 +451,29 @@
                             select = 'false';
                         }
                         $(u).attr('select', select);
-                        // $(u).dataFormUpdate(values[index]);
+                        $(u).dataFormUpdate(values[index]);
                     });
                 };
             }
 
-            applyForSel($("[id=toApplyFor]"));
-            residenceSel($("[residence]"));
+            applyForSel($('[id="toApplyFor"]'));
+            residenceSel($('[residence]'));
 
-            fillOut($("[information]"), "info");
-            fillOut($("[contact]"), "contact");
-            fillOut($("[address]"), "address");
+            fillOut($('[information]'), 'info');
+            fillOut($('[contact]'), 'contact');
+            fillOut($('[address]'), 'address');
 
             $(document).ready(function() {
-                $.post("query.php", {query: "retrieve"}, function(element) {
+                $.post('query.php', {query: 'retrieve'}, function(element) {
                     let {rows} = element, row = rows[0];
-                    $("[id=toApplyFor]").applyForSelect(row);
-                }, "json");
+                    $('[id="toApplyFor"]').applyForSelect(row);
+                }, 'json');
 
-                $.post("query.php", {query: "retrieve"}, function(element) {
+                $.post('query.php', {query: 'retrieve'}, function(element) {
                     let {rows} = element, row = rows[0];
-                    $("[class=subForm]").fillInSelect(row);
-                    $("[class=subForm]").residenceSelect(row);
-                }, "json");
+                    $('[class="subForm"]').fillInSelect(row);
+                    $('[class="subForm"]').residenceSelect(row);
+                }, 'json');
             });
         </script>
     </body>
