@@ -22,7 +22,7 @@
                 margin-right: 26px;
             }
             [content] {
-                /* flex-grow: 1; */
+                flex-grow: 1;
                 cursor: pointer;
                 display: flex;
                 padding-right: 50px;
@@ -38,7 +38,7 @@
                 margin-bottom: 28px;
                 margin-top: 28px;
                 text-align: center;
-}
+            }
             [class=date] {
                 font-family: NotoSefif;
                 font-size: 18px;
@@ -151,7 +151,7 @@
             <div class=content i18n=purpose>
                 <span class=content i18n=toApplyFor></span>
             </div>
-            <div class=indentSubcontent id=purpose></div>
+            <div class=indentSubcontent id=toApplyFor></div>
         </indentTitle>
 
         <!-- description -->
@@ -262,25 +262,29 @@
                 $(o).on('click', fun);
                 return this;
             }
+            $.fn.dataFormUpdate = function(value) {
+                let o = this;
+                let col = $(o).closest("[dataForm]").attr("dataForm");
+                console.log(col);
+                let row = $(o).closest("[row]").prop("row");
+                console.log(row);
+                let {dataFormPrimaryKey} = row;
+                $.post("query.php", {query: "modify", dataFormPrimaryKey, col, value}, function(msg) {
+                    console.log(msg);
+                })
+            }
+
+            // 申請...
             $.fn.applyForSelect = function(row) {
                 let o = this;
                 $(o).attr("row", "").prop("row", row);
                 let {dataFormFirstTime, dataFormCertificateHasCeased, dataFormLost, dataFormReplacement, dataFormEnglishVersion} = row;
-                let select, value;
+                // let select, value;
                 $("[dataForm=dataFormFirstTime]", o).attr("select", dataFormFirstTime == "1" ? "true" : "false");
                 $("[dataForm=dataFormCertificateHasCeased]", o).attr("select", dataFormCertificateHasCeased == "1" ? "true" : "false");
                 $("[dataForm=dataFormLost]", o).attr("select", dataFormLost == "1" ? "true" : "false");
                 $("[dataForm=dataFormReplacement]", o).attr("select", dataFormReplacement == "1" ? "true" : "false");
                 $("[dataForm=dataFormEnglishVersion]", o).attr("select", dataFormEnglishVersion == "1" ? "true" : "false");
-            }
-            $.fn.applyForUpdate = function(value) {
-                let o = this;
-                let col = $(o).closest("[col]").attr("col");
-                let row = $(o).closest("[rows]").prop("rows");
-                let {primaryKey} = row;
-                $.post("query.php", {query: "modify", primaryKey, col, value}, function(msg) {
-                    console.log(msg);
-                })
             }
             function applyForSel(obj) {
                 let i18ns = csvConvert(`firstTime, certificateHasCeased, lost, replacement, englishVersion`);
@@ -299,9 +303,114 @@
                             select = 'false';
                         }
                         $(u).attr('select', select);
-                        $(u).applyForUpdate(select == "true" ? "1" : "0");
+                        $(u).dataFormUpdate(select == "true" ? "1" : "0");
                     });
                 }
+            }
+
+            // 申請人資料...
+            $.fn.fillInSelect = function(row) {
+                let o = this;
+                $(o).attr("row", "").prop("row", row);
+                let {dataFormApplicant, dataFormIdentityCardNumber, dataFormContactNumber, dataFormPhoneNumber, dataFormAddress} = row;
+                // let value = dataFormApplicant;
+                // $("[dataForm=dataFormApplicant]").html(value);
+                $("[dataForm=dataFormApplicant]").html(dataFormApplicant);
+                $("[dataForm=dataFormIdentityCardNumber]").html(dataFormIdentityCardNumber);
+                $("[dataForm=dataFormContactNumber]").html(dataFormContactNumber);
+                $("[dataForm=dataFormPhoneNumber]").html(dataFormPhoneNumber);
+                $("[dataForm=dataFormAddress]").html(dataFormAddress);
+            }
+            function fillOut(obj, tag) {
+                $.fn.fillIn = function(i18n, dataForm) {
+                    let obj = this;
+                    let value = 5050;
+                    $(`
+                    <span i18n=${i18n} title></span>
+                    `).appendTo(obj);
+                    $(`
+                    <span dataForm=${dataForm} content>${value}</span>
+                    `).appendTo(obj).OnClick((e)=>{
+                        let u = $(e.currentTarget);
+                        let old = u.html(); u.html("");
+                        let tbox = $("<textarea rows=1 cols=12>").html(old).appendTo(u).OnClick((e)=>{
+                                let o = $(e.currentTarget);
+                                e.stopPropagation();
+                            }).on("blur", e=>{
+                                let tbox = e.currentTarget;
+                                $(u).html($(tbox).val());
+                                $(u).dataFormUpdate($(tbox).val());
+                            });
+
+                            tbox.get(0).setSelectionRange(old.length, old.length);
+                            tbox.trigger('focus');
+                        });
+                        return this;
+                    }
+
+                if (tag == "info") {
+                obj.fillIn("applicant", "dataFormApplicant").append("<fillOne>").fillIn("identityCardNumber", "dataFormIdentityCardNumber").append("<fillOne>");
+                }
+                if (tag == "contact") {
+                    obj.fillIn("contactNumber", "dataFormContactNumber").append("<fillOne>").fillIn("phoneNumber", "dataFormPhoneNumber").append("<fillOne>");
+                }
+                if (tag == "address") {
+                    obj.fillIn("address", "dataFormAddress").append("<fillOne>");
+                }
+            }
+            $.fn.residenceSelect = function(row) {
+                let o = this;
+                $(o).attr("row", "").prop("row", row);
+                let {dataFormResidence} = row;
+
+                // let dataForms = csvConvert(`
+                //     dataFormTaipeiCity, dataFormKeelungCity, dataFormNewTaipeiCity, dataFormLienchiangCounty, 
+                //     dataFormYilanCounty, dataFormHsinchuCity, dataFormHsinchuCounty, dataFormTaoyuanCity, 
+                //     dataFormMiaoliCounty, dataFormTaichungCity, dataFormChanghuaCounty, dataFormNantouCounty, 
+                //     dataFormChiayiCity, dataFormChiayiCounty, dataFormYunlinCounty, dataFormTainanCity, 
+                //     dataFormKaohsiungCity, dataFormPenghuCounty, dataFormKinmenCounty, dataFormPingtungCounty, 
+                //     dataFormTaitungCounty, dataFormHualienCounty
+                //     `);
+                // let values = csvConvert(`
+                //     台北市, 基隆市, 新北市, 連江縣, 
+                //     宜蘭縣, 新竹市, 新竹縣, 桃園市, 
+                //     苗栗縣, 台中市, 彰化縣, 南投縣, 
+                //     嘉義市, 嘉義縣, 雲林縣, 台南市, 
+                //     高雄市, 澎湖縣, 金門縣, 屏東縣, 
+                //     台東縣, 花蓮縣
+                //     `);
+
+                // for (let index = 0; index < dataForms.length; index++) {
+                //     $(`"[dataForm=${dataForms[index]}]"`, `${o}`).attr("select", `${dataFormResidence}` == `"${values[index]}"` ? "true" : "false")
+                // }
+
+                $("[dataForm=dataFormTaipeiCity]",          o).attr("select", dataFormResidence == "台北市" ? "true" : "false");
+                $("[dataForm=dataFormKeelungCity]",         o).attr("select", dataFormResidence == "基隆市" ? "true" : "false");
+                $("[dataForm=dataFormNewTaipeiCity]",       o).attr("select", dataFormResidence == "新北市" ? "true" : "false");
+                $("[dataForm=dataFormLienchiangCounty]",    o).attr("select", dataFormResidence == "連江縣" ? "true" : "false");
+
+                $("[dataForm=dataFormYilanCounty]",         o).attr("select", dataFormResidence == "宜蘭縣" ? "true" : "false");
+                $("[dataForm=dataFormHsinchuCity]",         o).attr("select", dataFormResidence == "新竹市" ? "true" : "false");
+                $("[dataForm=dataFormHsinchuCounty]",       o).attr("select", dataFormResidence == "新竹縣" ? "true" : "false");
+                $("[dataForm=dataFormTaoyuanCity]",         o).attr("select", dataFormResidence == "桃園市" ? "true" : "false");
+
+                $("[dataForm=dataFormMiaoliCounty]",        o).attr("select", dataFormResidence == "苗栗縣" ? "true" : "false");
+                $("[dataForm=dataFormTaichungCity]",        o).attr("select", dataFormResidence == "台中市" ? "true" : "false");
+                $("[dataForm=dataFormChanghuaCounty]",      o).attr("select", dataFormResidence == "彰化縣" ? "true" : "false");
+                $("[dataForm=dataFormNantouCounty]",        o).attr("select", dataFormResidence == "南投縣" ? "true" : "false");
+                
+                $("[dataForm=dataFormChiayiCity]",          o).attr("select", dataFormResidence == "嘉義市" ? "true" : "false");
+                $("[dataForm=dataFormChiayiCounty]",        o).attr("select", dataFormResidence == "嘉義縣" ? "true" : "false");
+                $("[dataForm=dataFormYunlinCounty]",        o).attr("select", dataFormResidence == "雲林縣" ? "true" : "false");
+                $("[dataForm=dataFormTainanCity]",          o).attr("select", dataFormResidence == "台南市" ? "true" : "false");
+                
+                $("[dataForm=dataFormKaohsiungCity]",       o).attr("select", dataFormResidence == "高雄市" ? "true" : "false");
+                $("[dataForm=dataFormPenghuCounty]",        o).attr("select", dataFormResidence == "澎湖縣" ? "true" : "false");
+                $("[dataForm=dataFormKinmenCounty]",        o).attr("select", dataFormResidence == "金門縣" ? "true" : "false");
+                $("[dataForm=dataFormPingtungCounty]",      o).attr("select", dataFormResidence == "屏東縣" ? "true" : "false");
+                
+                $("[dataForm=dataFormTaitungCounty]",       o).attr("select", dataFormResidence == "台東縣" ? "true" : "false");
+                $("[dataForm=dataFormHualienCounty]",       o).attr("select", dataFormResidence == "花蓮縣" ? "true" : "false");
             }
             function residenceSel(obj) {
                 let i18ns = csvConvert(`
@@ -321,6 +430,14 @@
                     dataFormKaohsiungCity, dataFormPenghuCounty, dataFormKinmenCounty, dataFormPingtungCounty, 
                     dataFormTaitungCounty, dataFormHualienCounty
                     `);
+                let values = csvConvert(`
+                    台北市, 基隆市, 新北市, 連江縣, 
+                    宜蘭縣, 新竹市, 新竹縣, 桃園市, 
+                    苗栗縣, 台中市, 彰化縣, 南投縣, 
+                    嘉義市, 嘉義縣, 雲林縣, 台南市, 
+                    高雄市, 澎湖縣, 金門縣, 屏東縣, 
+                    台東縣, 花蓮縣
+                    `);
 
                 for (let index = 0; index < i18ns.length; index++) {
                     $(`<span style=white-space: nowrap select=false i18n=${i18ns[index]} dataForm=${dataForms[index]} id=checkboxOption></div>`).appendTo(obj).OnClick(function(e) {
@@ -334,47 +451,12 @@
                             select = 'false';
                         }
                         $(u).attr('select', select);
+                        // $(u).dataFormUpdate(values[index]);
                     });
                 };
             }
-            function fillOut(obj, tag) {
-                $.fn.fillIn = function(title) {
-                    let obj = this;
-                    let value = 5050;
-                    $(`
-                    <span i18n=${title} title></span>
-                    `).appendTo(obj);
-                    $(`
-                    <span content>${value}</span>
-                    `).appendTo(obj).OnClick((e)=>{
-                        let u = $(e.currentTarget);
-                        let old = u.html(); u.html("");
-                        let tbox = $("<textarea rows=1 cols=12>").html(old).appendTo(u).OnClick((e)=>{
-                                let o = $(e.currentTarget);
-                                e.stopPropagation();
-                            }).on("blur", e=>{
-                                let tbox = e.currentTarget;
-                                $(u).html($(tbox).val());
-                            });
 
-                            tbox.get(0).setSelectionRange(old.length, old.length);
-                            tbox.trigger('focus');
-                        });
-                        return this;
-                    }
-                    
-                    if (tag == "info") {
-                    obj.fillIn("applicant").append("<fillOne>").fillIn("identityCardNumber").append("<fillOne>");
-                    }
-                    if (tag == "contact") {
-                        obj.fillIn("contactNumber").append("<fillOne>").fillIn("phoneNumber").append("<fillOne>");
-                    }
-                    if (tag == "address") {
-                        obj.fillIn("address").append("<fillOne>");
-                    }
-                }
-
-            applyForSel($("[id=purpose]"));
+            applyForSel($("[id=toApplyFor]"));
             residenceSel($("[residence]"));
 
             fillOut($("[information]"), "info");
@@ -384,8 +466,14 @@
             $(document).ready(function() {
                 $.post("query.php", {query: "retrieve"}, function(element) {
                     let {rows} = element, row = rows[0];
-                    $("[id=purpose]").applyForSelect(row);
-                }, "json")
+                    $("[id=toApplyFor]").applyForSelect(row);
+                }, "json");
+
+                $.post("query.php", {query: "retrieve"}, function(element) {
+                    let {rows} = element, row = rows[0];
+                    $("[class=subForm]").fillInSelect(row);
+                    $("[class=subForm]").residenceSelect(row);
+                }, "json");
             });
         </script>
     </body>

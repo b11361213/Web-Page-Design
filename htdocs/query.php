@@ -18,16 +18,16 @@
             // print_r( json_encode($element, JSON_UNESCAPED_UNICODE) );
             echo json_encode($element, JSON_UNESCAPED_UNICODE);
             $result -> free_result();
-    }}
+        }}
     if ($query == "modify") {
-        $primaryKey = $_REQUEST["dataFormPrimaryKey"];
+        $dataFormPrimaryKey = $_REQUEST["dataFormPrimaryKey"];
         $col = $_REQUEST["col"];
         $value = $_REQUEST["value"];
 
-        if ($rows = mysqli_query($CONN, "UPDATE dataform SET {$col} = \"{$value}\" WHERE dataFormPrimaryKey = \"{$primaryKey}\"")) {
+        if ($rows = mysqli_query($CONN, "UPDATE dataform SET {$col} = \"{$value}\" WHERE dataFormPrimaryKey = \"{$dataFormPrimaryKey}\"")) {
             $element = [];
             $element["Status"] = "modify succeeded";
-            $element["rows"] = [];
+            // $element["rows"] = [];
             echo json_encode($element, JSON_UNESCAPED_UNICODE);
         }}
 
