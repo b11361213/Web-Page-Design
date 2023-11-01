@@ -1,35 +1,59 @@
 <?php
-    $CONN = new mysqli("localhost", "root", "", "form");
-    mysqli_query($CONN, "SET NAMES utf8");
+    require 'table-query.php';
+    $setting001 = <<<EOD
+    ALTER TABLE `dataform`
+        ADD PRIMARY KEY (`dataFormPrimaryKey`);
+    EOD;
+    $setting002 = <<<EOD
+    ALTER TABLE `dataform`
+        MODIFY `dataFormPrimaryKey` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+    EOD;
 
-    if ($CONN -> connect_errno) {die("Failed to connect to MySQL: " . $CONN -> connect_error);} 
 
-    $query = $_REQUEST["query"];
+    $CONN = new mysqli('localhost', 'root', '', 'form');
+    mysqli_query($CONN, 'SET NAMES utf8');
 
-    if ($query == "retrieve") {
-        if ($result = mysqli_query($CONN, "SELECT * FROM dataform")) {
+    if ($CONN -> connect_errno) {die('Failed to connect to MySQL: ' . $CONN -> connect_error);} 
+
+    $query = $_REQUEST['query'];
+
+    if ($query == 'retrieve') {
+        if ($result = mysqli_query($CONN, 'SELECT * FROM dataform')) {
             $rows = [];
 
             while($rowArray = $result -> fetch_assoc()) {
                 $rows[] = $rowArray;
             }
             $element = [];
-            $element["rows"] = $rows;
+            $element['rows'] = $rows;
             // print_r( json_encode($element, JSON_UNESCAPED_UNICODE) );
             echo json_encode($element, JSON_UNESCAPED_UNICODE);
             $result -> free_result();
-        }}
-    if ($query == "modify") {
-        $dataFormPrimaryKey = $_REQUEST["dataFormPrimaryKey"];
-        $col = $_REQUEST["col"];
-        $value = $_REQUEST["value"];
+        }
+    }
+    if ($query == 'modify') {
+        $dataFormPrimaryKey = $_REQUEST['dataFormPrimaryKey'];
+        $col = $_REQUEST['col'];
+        $value = $_REQUEST['value'];
 
-        if ($rows = mysqli_query($CONN, "UPDATE dataform SET {$col} = \"{$value}\" WHERE dataFormPrimaryKey = \"{$dataFormPrimaryKey}\"")) {
+        if ($rows = mysqli_query($CONN, 'UPDATE dataform SET {$col} = \'{$value}\' WHERE dataFormPrimaryKey = \'{$dataFormPrimaryKey}\'')) {
             $element = [];
-            $element["Status"] = "modify succeeded";
-            // $element["rows"] = [];
+            $element['Status'] = 'modify succeeded';
+            // $element['rows'] = [];
             echo json_encode($element, JSON_UNESCAPED_UNICODE);
-        }}
+        }
+    }
+    if ($query == 'rebuild') {
+        mysqli_query($CONN, 'DROP TABLE IF EXISTS `dataform`;');
+        mysqli_query($CONN, 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";');
+        mysqli_query($CONN, 'START TRANSACTION;');
+        // mysqli_query($CONN, '');
+        mysqli_query($CONN, $tableQuery);
+        mysqli_query($CONN, $setting001);
+        mysqli_query($CONN, $setting002);
+        mysqli_query($CONN, 'COMMIT;');
+        // mysqli_query($CONN, '');
+    }
 
     $CONN -> close();
     /* 

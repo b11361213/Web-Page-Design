@@ -6,3 +6,7 @@
     font-family: EduKai;
     src: url("font/edukai-4.0.ttf");
 }
+@font-face {
+    font-family: Geist;
+    src: url("font/Geist-Regular.otf");
+}

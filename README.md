@@ -17,3 +17,12 @@ xcopy 'C:\Users\Administrator\Downloads\Web-Page-Design-main\htdocs\*' 'C:\xampp
 [MySQLAdmin](https://localhost/phpmyadmin/)
 
 [XAMPP 8.2.4](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.4/)
+
+## To-do list
+
+[ ] 安裝 SSL 憑證  
+[ ] 啟動 XAMPP  
+ - [ ] 啟動 Apache
+ - [ ] 啟動 MySQL
+   - [ ] 建立 Form 資料庫
+   - [ ] Rebuild table
