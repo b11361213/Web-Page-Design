@@ -47,12 +47,14 @@
         mysqli_query($CONN, 'DROP TABLE IF EXISTS `dataform`;');
         mysqli_query($CONN, 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";');
         mysqli_query($CONN, 'START TRANSACTION;');
-        // mysqli_query($CONN, '');
         mysqli_query($CONN, $tableQuery);
+
         mysqli_query($CONN, $setting001);
         mysqli_query($CONN, $setting002);
         mysqli_query($CONN, 'COMMIT;');
-        // mysqli_query($CONN, '');
+        // create table
+        
+        mysqli_query($CONN, 'INSERT INTO `dataform` (`dataFormPrimaryKey`, `dataFormDateOfApplicationDate`, `dataFormApplyForPurposeChoice`, `dataFormApplicantFormText`, `dataFormIdentityCardNumberFormText`, `dataFormContactNumberFormText`, `dataFormPhoneNumberFormText`, `dataFormResidenceFormChoice`, `dataFormAddressFormText`) VALUES (NULL, current_timestamp(), "dataFormFirstTime", "Aikawa Manabi", "A200000000", "02-0000-0000", "0900-000-000", "台北市", "台北市大安區臥龍街100號");');
     }
 
     $CONN -> close();

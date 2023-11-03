@@ -5,8 +5,8 @@ xcopy 'C:\Users\Administrator\Downloads\Web-Page-Design-main\htdocs\*' 'C:\xampp
 mkdir 'C:\xampp\apache\crt\'
 xcopy 'C:\Users\Administrator\Downloads\Web-Page-Design-main\others\cert.conf' 'C:\xampp\apache\crt\'
 xcopy 'C:\Users\Administrator\Downloads\Web-Page-Design-main\others\make-cert.bat' 'C:\xampp\apache\crt\'
-explorer 'C:\xampp\apache\crt\localhost'
-Start-Sleep -Seconds 20
+explorer 'C:\xampp\apache\crt\'
+Read-Host "Press any key to countine"
 
 rm 'C:\xampp\apache\conf\extra\httpd-xampp.conf'
 xcopy 'C:\Users\Administrator\Downloads\Web-Page-Design-main\others\httpd-xampp.conf' 'C:\xampp\apache\conf\extra\'
