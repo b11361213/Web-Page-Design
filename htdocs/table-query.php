@@ -10,4 +10,12 @@
         `dataFormResidenceFormChoice` tinytext NOT NULL COMMENT '居住縣市',
         `dataFormAddressFormText` tinytext NOT NULL COMMENT '通訊地址'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+    CREATE TABLE IF NOT EXISTS `datamember` (
+        `dataMemberPrimaryKey` int(64) NOT NULL,
+        `dataMemberAccountCreationDateDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '帳號創建日期',
+        `dataMemberUsernameMemberText` tinytext NOT NULL COMMENT '使用者名稱',
+        `dataMemberPasswordMemberText` tinytext NOT NULL COMMENT '密碼',
+        `dataMemberEmailMemberText` tinytext NOT NULL COMMENT '電子郵件'
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 EOD ?>

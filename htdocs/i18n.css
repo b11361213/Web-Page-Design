@@ -27,3 +27,6 @@
 [language=Chinese] [i18n=phoneNumber]:before{content:"手機號碼"}[language=Chinese] [i18n=phoneNumber]:after{content:""}[language=English] [i18n=phoneNumber]:before{content:"Phone number"}[language=English] [i18n=phoneNumber]:after{content:""}
 [language=Chinese] [i18n=residence]:before{content:"居住縣市"}[language=Chinese] [i18n=residence]:after{content:""}[language=English] [i18n=residence]:before{content:"City/County of residence"}[language=English] [i18n=residence]:after{content:""}
 [language=Chinese] [i18n=address]:before{content:"通訊地址"}[language=Chinese] [i18n=address]:after{content:""}[language=English] [i18n=address]:before{content:"Address"}[language=English] [i18n=address]:after{content:""}
+[lang=Chinese] [i18n=username]:before{content:"使用者名稱"}[lang=Chinese] [i18n=username]:after{content:""}[lang=English] [i18n=username]:before{content:"Username"}[lang=English] [i18n=username]:after{content:""}
+[lang=Chinese] [i18n=password]:before{content:"密碼"}[lang=Chinese] [i18n=password]:after{content:""}[lang=English] [i18n=password]:before{content:"Password"}[lang=English] [i18n=password]:after{content:""}
+[lang=Chinese] [i18n=email]:before{content:"電子郵件"}[lang=Chinese] [i18n=email]:after{content:""}[lang=English] [i18n=email]:before{content:"Email"}[lang=English] [i18n=email]:after{content:""}
