@@ -28,6 +28,12 @@
                 display: flex;
                 padding-right: 50px;
             }
+            [class="loginForm"] {
+                width: 100%;
+            }
+            td.langSelect {
+                width: 90%;
+            }
             [class="langSelect"] {
                 font-family: NotoSefif;
                 font-size: 16px;
@@ -123,11 +129,23 @@
         <!-- [i18n Google sheets](https://docs.google.com/spreadsheets/d/1sp-Rw0xcjd-nEMIacbVywY5zIlCbBGr-Ja9EF0DgJfg) -->
     </head>
     <body language="Chinese">
-        <span class="langSelect">Language select --</span>
-        <span class="langSelect" langSelect>
-            <span onclick="langChange(this);">Chinese</span>
-            <span onclick="langChange(this);">English</span>
-        </span>
+        <table class="loginForm">
+            <tr>
+                <td class="langSelect" rowspan="3">
+                    <span class="langSelect">Language select --</span>
+                    <span class="langSelect" langSelect>
+                        <span onclick="langChange(this);">Chinese</span>
+                        <span onclick="langChange(this);">English</span>
+                    </span>
+                </td>
+                <td>Username</td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
         
         <!-- title -->
         <div class="title" i18n="header"></div>

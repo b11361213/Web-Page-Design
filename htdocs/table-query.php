@@ -1,4 +1,5 @@
 <?php $tableQuery = <<<EOD
+    DROP TABLE IF EXISTS `dataform`;
     CREATE TABLE IF NOT EXISTS `dataform` (
         `dataFormPrimaryKey` int(64) NOT NULL,
         `dataFormDateOfApplicationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '申請日期',
@@ -11,6 +12,7 @@
         `dataFormAddressFormText` tinytext NOT NULL COMMENT '通訊地址'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+    DROP TABLE IF EXISTS `datamember`;
     CREATE TABLE IF NOT EXISTS `datamember` (
         `dataMemberPrimaryKey` int(64) NOT NULL,
         `dataMemberAccountCreationDateDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '帳號創建日期',
