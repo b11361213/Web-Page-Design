@@ -28,15 +28,17 @@
                 display: flex;
                 padding-right: 50px;
             }
-            [class="loginForm"] {
-                width: 100%;
+            [loginFormBotton] {
+                height: 30px;
+                width: 66px;
             }
             td.langSelect {
-                width: 90%;
+                width: 80%;
             }
-            [class="langSelect"] {
+            [class="loginForm"] {
                 font-family: NotoSefif;
                 font-size: 16px;
+                width: 100%;
             }
             [class="title"] {
                 font-family: EduKai;
@@ -93,14 +95,14 @@
                 padding-top: 12px;
                 text-align: left;
             }
+            #checkboxOption {
+                margin-left: 24px;
+            }
             #memo {
                 /* position:absolute; */
                 /* right: 12px; */
                 bottom: 4px;
                 font-size: 14px;
-            }
-            #checkboxOption {
-                margin-left: 24px;
             }
             flexrow {
                 display: flex;
@@ -131,7 +133,7 @@
     <body language="Chinese">
         <table class="loginForm">
             <tr>
-                <td class="langSelect" rowspan="3">
+                <td class="langSelect" rowspan="2">
                     <span class="langSelect">Language select --</span>
                     <span class="langSelect" langSelect>
                         <span onclick="langChange(this);">Chinese</span>
@@ -139,14 +141,17 @@
                     </span>
                 </td>
                 <td>Username</td>
-                <td><input type="text"></td>
+                <td><input memberUsername type="text"></td>
+                <td  rowspan="2">
+                    <button loginFormBotton>submit</button>
+                </td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="text"></td>
+                <td><input memberPasswd type="password"></td>
             </tr>
         </table>
-        
+
         <!-- title -->
         <div class="title" i18n="header"></div>
 
