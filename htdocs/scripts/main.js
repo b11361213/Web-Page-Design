@@ -36,6 +36,17 @@ function langChange(obj) {
     // [透過 JavaScript 動態修改CSS 樣式、屬性 - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天](https://ithelp.ithome.com.tw/articles/10226003)
     // [DOM CSS 修改 CSS 樣式 - JavaScript (JS) 教學 Tutorial](https://www.fooish.com/javascript/dom/css.html)
 }
+function login() {
+    let username = $('[dataMemberUsername]').val();
+    let password = $('[dataMemberPassword]').val();
+    // let username = document.querySelector('[dataMemberUsername]');
+    // console.log($(username).val());https://vscode.dev/
+    // console.log($(password).val());
+    $.post('query.php', {query: 'login', username, password}, function(element) {
+        // let {status} = element;
+        console.log(element);
+    })
+}
 $.fn.OnClick = function(fun) {
     let o = this;
     $(o).css('cursor', 'pointer');
@@ -45,13 +56,13 @@ $.fn.OnClick = function(fun) {
 $.fn.dataFormUpdate = function(value) {
     let o = this;
     let col = $(o).closest('[dataForm]').attr('dataForm');
-    console.log(col);
+    // console.log(col);
     let row = $(o).closest('[row]').prop('row');
-    console.log(row);
+    // console.log(row);
     let {dataFormPrimaryKey} = row;
     $.post('query.php', {query: 'modify', dataFormPrimaryKey, col, value}, function(msg) {
         console.log(msg);
-    })
+    }, 'json');
 }
 
 // 申請...

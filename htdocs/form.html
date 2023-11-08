@@ -11,14 +11,57 @@
         <script src="scripts\main.js"></script>
         <title>localhost/form.html</title>
         <style>
+            body {
+                margin: 0px;
+            }
+            [class="header"] {
+                background-color: #373C38;
+                color: white;
+                font-family: Geist;
+                font-size: 16px;
+                font-weight: 400;
+                margin-bottom: 128px;
+                padding-bottom: 8px;
+                padding-top: 8px;
+                padding: 26px;
+                width: 100%;
+            }
             [langSelect] span {
-                background-color: gainsboro;
+                /* font-family: Geist; */
+                background-color: white;
                 border-radius: 3px;
                 border: solid 1px;
+                color: #373C38;
                 cursor: pointer;
-                font-family: NotoSefif;
                 padding: 3px;
             }
+            [loginForm] span {
+                /* font-family: Geist; */
+                background-color: white;
+                border-radius: 3px;
+                border: solid 1px;
+                color: #373C38;
+                cursor: pointer;
+                padding: 3px;
+            }
+            [loginForm] input {
+                margin-left: 6px;
+                margin-right: 6px;
+            }
+            td.langSelect {
+                width: 90%;
+            }
+            /* hr {
+                display: block;
+                margin-right: 0.5em;
+                margin-left: 0.5em;
+                margin-top: 12px;
+                margin-bottom: 128px;
+                border-style: inset;
+                border-width: 1px;
+            } */
+            /* header */
+
             [title] {
                 margin-right: 26px;
             }
@@ -27,18 +70,6 @@
                 cursor: pointer;
                 display: flex;
                 padding-right: 50px;
-            }
-            [loginFormBotton] {
-                height: 30px;
-                width: 66px;
-            }
-            td.langSelect {
-                width: 80%;
-            }
-            [class="loginForm"] {
-                font-family: NotoSefif;
-                font-size: 16px;
-                width: 100%;
             }
             [class="title"] {
                 font-family: EduKai;
@@ -131,7 +162,7 @@
         <!-- [i18n Google sheets](https://docs.google.com/spreadsheets/d/1sp-Rw0xcjd-nEMIacbVywY5zIlCbBGr-Ja9EF0DgJfg) -->
     </head>
     <body language="Chinese">
-        <table class="loginForm">
+        <table class="header">
             <tr>
                 <td class="langSelect" rowspan="2">
                     <span class="langSelect">Language select --</span>
@@ -141,17 +172,22 @@
                     </span>
                 </td>
                 <td>Username</td>
-                <td><input memberUsername type="text"></td>
-                <td  rowspan="2">
-                    <button loginFormBotton>submit</button>
+                <td loginForm>
+                    <input dataMemberUsername type="text" size="12">
+                </td>
+                <td loginForm rowspan="2">
+                    <span onclick="login();">Submit</span>
                 </td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input memberPasswd type="password"></td>
+                <td loginForm>
+                    <input dataMemberPassword type="password" size="12">
+                </td>
             </tr>
         </table>
-
+        <!-- <hr> -->
+        
         <!-- title -->
         <div class="title" i18n="header"></div>
 

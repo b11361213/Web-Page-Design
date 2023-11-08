@@ -1,35 +1,18 @@
 <?php
-require 'table-query.php';
 
-function setting($table) { 
-    $upper = ucfirst($table);
-    $setting001 = <<<EOD
-    ALTER TABLE `data{$table}`
-        ADD PRIMARY KEY (`data{$upper}PrimaryKey`);
-    EOD;
-    $setting002 = <<<EOD
-    ALTER TABLE `data{$table}`
-        MODIFY `data{$upper}PrimaryKey` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-    EOD;
-    return array($setting001, $setting002);
-}
-function free_result($CONN) {
-    while (mysqli_more_results($CONN) && mysqli_next_result($CONN)) {
-        if (mysqli_use_result($CONN) instanceof mysqli_result) {
-            mysqli_free_result($CONN);
-        }
-    }
-}
+session_start();
 
 $CONN = new mysqli('localhost', 'root', '', 'form');
-mysqli_query($CONN, 'SET NAMES utf8');
+mysqli_query($CONN, "SET NAMES utf8");
 
 if ($CONN -> connect_errno) {die('Failed to connect to MySQL: ' . $CONN -> connect_error);} 
 
 $query = $_REQUEST['query'];
 
 if ($query == 'retrieve') {
-    if ($result = mysqli_query($CONN, 'SELECT * FROM dataform')) {
+    $sqlQuery = "SELECT * FROM dataform";
+
+    if ($result = mysqli_query($CONN, $sqlQuery)) {
         $rows = [];
 
         while($rowArray = $result -> fetch_assoc()) {
@@ -46,35 +29,46 @@ if ($query == 'modify') {
     $dataFormPrimaryKey = $_REQUEST['dataFormPrimaryKey'];
     $col = $_REQUEST['col'];
     $value = $_REQUEST['value'];
+    $sqlQuery = "UPDATE dataform SET {$col} = \"{$value}\" WHERE dataFormPrimaryKey = \"{$dataFormPrimaryKey}\"";
 
-    if ($rows = mysqli_query($CONN, "UPDATE dataform SET {$col} = \"{$value}\" WHERE dataFormPrimaryKey = \"{$dataFormPrimaryKey}\"")) {
+    if ($rows = mysqli_query($CONN, $sqlQuery)) {
         $element = [];
-        $element['Status'] = 'modify succeeded';
+        $element['Status'] = 'query: '.$sqlQuery.' update succeeded';
         // $element['rows'] = [];
         echo json_encode($element, JSON_UNESCAPED_UNICODE);
     }
 }
-if ($query == 'rebuild') {
-    mysqli_query($CONN, 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";');
-    mysqli_query($CONN, 'START TRANSACTION;');
-    mysqli_multi_query($CONN, $tableQuery);
-    free_result($CONN);
+if ($query == 'login') {
+    $username = $_REQUEST['username']; $username = addslashes($username);
+    $password = $_REQUEST['password'];
+    $encryptedPassword = hash('sha256', 'encrypt'.$password);
+    // [PHP: hash - Manual](https://www.php.net/manual/en/function.hash.php)
+    // [php - Undefined function sha256() - Stack Overflow](https://stackoverflow.com/questions/8533530/undefined-function-sha256)
+    $sqlQuery = "SELECT * FROM datamember WHERE dataMemberUsernameMemberText = \"{$username}\" AND dataMemberPasswordMemberText = \"{$encryptedPassword}\"";
 
-    $tables = ['form', 'member'];
-    for ($i = 0; $i < 2; $i++) {
-        $settingArray = setting($tables[$i]);
-        mysqli_query($CONN, $settingArray[0]);
-        mysqli_query($CONN, $settingArray[1]);
-        // create table
+    $rows = mysqli_query($CONN, $sqlQuery);
+
+    $n = 0;
+    while ($row = $rows -> fetch_assoc()) {
+        $n++;
+        $Row = $row;
     }
-    mysqli_query($CONN, '
-    INSERT INTO `dataform` (`dataFormPrimaryKey`, `dataFormDateOfApplicationDate`, `dataFormApplyForPurposeChoice`, `dataFormApplicantFormText`, `dataFormIdentityCardNumberFormText`, `dataFormContactNumberFormText`, `dataFormPhoneNumberFormText`, `dataFormResidenceFormChoice`, `dataFormAddressFormText`)'.
-    'VALUES (NULL, current_timestamp(), "dataFormFirstTime", "Aikawa Manabi", "A200000000", "02-0000-0000", "0900-000-000", "台北市", "台北市大安區臥龍街100號");
-    ');
-    mysqli_query($CONN, '
-    INSERT INTO `datamember` (`dataMemberPrimaryKey`, `dataMemberAccountCreationDateDate`, `dataMemberUsernameMemberText`, `dataMemberPasswordMemberText`, `dataMemberEmailMemberText`)'.
-    'VALUES (NULL, current_timestamp(), "Aikawa Manabi", "isihasi1484", "aikawa5158@yahoo.co.jp");
-    ');
+    $element = [];
+    $element['rows'] = [];
+    do {
+        if ($n == 0) {
+            $element['status'] = 'wrong username or password';
+        }
+        if ($n > 1) {
+            $element['status'] = 'finded multiple result, need check database';
+        }
+        $_SESSION['newSession'] = $Row;
+        $element['rows'][0] = $Row;
+        // $element['rows'][0]['dataMemberPasswordMemberText'] = '';
+        $element['status'] = 'Login succeeded';
+    } while(0);
+
+    echo json_encode($element, JSON_UNESCAPED_UNICODE);
 }
 
 $CONN -> close();
