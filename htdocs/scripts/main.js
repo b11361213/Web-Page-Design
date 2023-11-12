@@ -43,9 +43,19 @@ function login() {
     // console.log($(username).val());https://vscode.dev/
     // console.log($(password).val());
     $.post('query.php', {query: 'login', username, password}, function(element) {
-        // let {status} = element;
-        console.log(element);
-    })
+        let {status} = element;
+        let {arrayResult} = element; arrayResult = arrayResult[0];
+        
+        if (status == 'Login succeeded') {
+            let {dataMemberUsernameMemberText, dataMemberEmailMemberText} = arrayResult;
+            let username = dataMemberUsernameMemberText;
+            let email = dataMemberEmailMemberText;
+            $('[LoginForm]').hide()
+            alert(`${status}\n\nWelcome -- ${username}`);
+        }
+        // console.log(status);
+        // console.log(arrayResult);
+    }, 'json');
 }
 $.fn.OnClick = function(fun) {
     let o = this;

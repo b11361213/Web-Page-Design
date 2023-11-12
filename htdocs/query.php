@@ -12,14 +12,17 @@ $query = $_REQUEST['query'];
 if ($query == 'retrieve') {
     $sqlQuery = "SELECT * FROM dataform";
 
+    // return sql search result to --> $result
     if ($result = mysqli_query($CONN, $sqlQuery)) {
-        $rows = [];
-
-        while($rowArray = $result -> fetch_assoc()) {
-            $rows[] = $rowArray;
-        }
+        
+        // for $singleResult in $result
+        $arrayResult = [];
+        
+        // append $singleResult to --> arrayResult
+        while($singleResult = $result -> fetch_assoc()) { $arrayResult[] = $singleResult; }
+        
         $element = [];
-        $element['rows'] = $rows;
+        $element['arrayResult'] = $arrayResult;
         // print_r( json_encode($element, JSON_UNESCAPED_UNICODE) );
         echo json_encode($element, JSON_UNESCAPED_UNICODE);
         $result -> free_result();
@@ -31,10 +34,10 @@ if ($query == 'modify') {
     $value = $_REQUEST['value'];
     $sqlQuery = "UPDATE dataform SET {$col} = \"{$value}\" WHERE dataFormPrimaryKey = \"{$dataFormPrimaryKey}\"";
 
-    if ($rows = mysqli_query($CONN, $sqlQuery)) {
+    if ($result = mysqli_query($CONN, $sqlQuery)) {
         $element = [];
-        $element['Status'] = 'query: '.$sqlQuery.' update succeeded';
-        // $element['rows'] = [];
+        $element['status'] = 'query: '.$sqlQuery.' update succeeded';
+        // $element['result'] = [];
         echo json_encode($element, JSON_UNESCAPED_UNICODE);
     }
 }
@@ -46,25 +49,19 @@ if ($query == 'login') {
     // [php - Undefined function sha256() - Stack Overflow](https://stackoverflow.com/questions/8533530/undefined-function-sha256)
     $sqlQuery = "SELECT * FROM datamember WHERE dataMemberUsernameMemberText = \"{$username}\" AND dataMemberPasswordMemberText = \"{$encryptedPassword}\"";
 
-    $rows = mysqli_query($CONN, $sqlQuery);
+    $result = mysqli_query($CONN, $sqlQuery);
 
     $n = 0;
-    while ($row = $rows -> fetch_assoc()) {
-        $n++;
-        $Row = $row;
-    }
+    $arrayResult = [];
+    while ($singleResult = $result -> fetch_assoc()) { $arrayResult[] = $singleResult; $n++; }
+
     $element = [];
-    $element['rows'] = [];
+    $element['arrayResult'] = $arrayResult;
+
     do {
-        if ($n == 0) {
-            $element['status'] = 'wrong username or password';
-        }
-        if ($n > 1) {
-            $element['status'] = 'finded multiple result, need check database';
-        }
-        $_SESSION['newSession'] = $Row;
-        $element['rows'][0] = $Row;
-        // $element['rows'][0]['dataMemberPasswordMemberText'] = '';
+        if ($n == 0) { $element['status'] = 'wrong username or password'; break; }
+        if ($n > 1)  { $element['status'] = 'finded multiple result, need check database'; break; }
+        $_SESSION['newSession'] = $arrayResult;
         $element['status'] = 'Login succeeded';
     } while(0);
 

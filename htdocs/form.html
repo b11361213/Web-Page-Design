@@ -171,19 +171,13 @@
                         <span onclick="langChange(this);">English</span>
                     </span>
                 </td>
-                <td>Username</td>
-                <td loginForm>
-                    <input dataMemberUsername type="text" size="12">
-                </td>
-                <td loginForm rowspan="2">
-                    <span onclick="login();">Submit</span>
-                </td>
+                <td loginForm>Username</td>
+                <td loginForm> <input dataMemberUsername type="text" size="12"> </td>
+                <td loginForm rowspan="2"> <span onclick="login();">Submit</span> </td>
             </tr>
             <tr>
-                <td>Password</td>
-                <td loginForm>
-                    <input dataMemberPassword type="password" size="12">
-                </td>
+                <td loginForm>Password</td>
+                <td loginForm> <input dataMemberPassword type="password" size="12"> </td>
             </tr>
         </table>
         <!-- <hr> -->
@@ -287,14 +281,14 @@
 
             $(document).ready(function() {
                 $.post('query.php', {query: 'retrieve'}, function(element) {
-                    let {rows} = element, row = rows[0];
-                    $('[id="toApplyFor"]').applyForSelect(row);
+                    let {arrayResult} = element, result = arrayResult[0];
+                    $('[id="toApplyFor"]').applyForSelect(result);
                 }, 'json');
 
                 $.post('query.php', {query: 'retrieve'}, function(element) {
-                    let {rows} = element, row = rows[0];
-                    $('[class="subForm"]').fillInSelect(row);
-                    $('[class="subForm"]').residenceSelect(row);
+                    let {arrayResult} = element, result = arrayResult[0];
+                    $('[class="subForm"]').fillInSelect(result);
+                    $('[class="subForm"]').residenceSelect(result);
                 }, 'json');
             });
         </script>
